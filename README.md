@@ -25,8 +25,16 @@ Prizes:
 - [ ] Parent can undo a purchase
 
 Other:
+- [ ] CI/CD Github Actions Pipeline
+  - HTTPS support
+  - Live production environment
+  - Linting/testing
+- [ ] Authentication for parent vs child
 - [ ] Can link parent and child accounts
+- [ ] Parents can select a child and that selection persists between pages (like docs)
+  - Context
 - [ ] Can toggle dark/light mode (defaults to browser setting)
+  - Store in local storage
 
 Stretch Goals:
 - [ ] Can optionally defer chores (parent configures for how long/often)
