@@ -1,0 +1,75 @@
+version: "3"
+
+services:
+  editor:
+    container_name: chore_champs_editor
+    build:
+      context: .
+    user: developer
+    privileged: true
+    volumes:
+      - developer_home:/home/developer
+      - ../:/app/
+      - $HOME/.ssh:/home/developer/.ssh
+      - $HOME/.gnupg:/home/developer/.gnupg
+      - ./.bashrc:/home/developer/.bashrc
+      - ./.bash-git-prompt:/home/developer/.bash-git-prompt
+    environment:
+      - TZ=America/Denver
+      - PYTHONPATH=/app/api/
+    working_dir: /app
+    command: tail -f /dev/null
+
+  client:
+    container_name: chore_champs_client
+    build:
+      context: .
+    user: developer
+    volumes:
+      - ../:/app/:z
+    env_file:
+      - .env
+    command: >
+      sh -c "
+        cd client
+        npm i
+        npm run dev
+      "
+    ports:
+      - 8080:8080
+
+  api:
+    container_name: chore_champs_api
+    build:
+      context: .
+    user: root
+    volumes:
+      - ../:/app/
+      - developer_home:/home/developer
+    working_dir: /app
+    environment:
+      - TZ=America/Denver
+    command: >
+      sh -c "
+        mkdir -p /home/developer/virtualenv
+        chown -R developer:developer /home/developer/virtualenv
+        
+        cd api
+        source /home/developer/.virtualenvs/choreChamps/bin/activate
+        pip install -r requirements.txt
+        uvicorn src.main:app --host 0.0.0.0 --reload
+      "
+
+  chore_champs_db:
+    image: postgres
+    container_name: chore_champs_db
+    environment:
+      - POSTGRES_DB=ChoreChamps
+      - POSTGRES_USER=ChoreChampsUser
+      - POSTGRES_PASSWORD=asdvoinsadvpoasndasvoi
+      - TZ=America/Denver
+    volumes:
+      - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  developer_home:
