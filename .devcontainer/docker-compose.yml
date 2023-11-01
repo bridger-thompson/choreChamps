@@ -29,6 +29,7 @@ services:
       - ../:/app/:z
     env_file:
       - .env
+    restart: unless-stopped
     command: >
       sh -c "
         cd client
@@ -49,6 +50,7 @@ services:
     working_dir: /app
     environment:
       - TZ=America/Denver
+    restart: unless-stopped
     command: >
       sh -c "
         mkdir -p /home/developer/virtualenv
@@ -68,8 +70,30 @@ services:
       - POSTGRES_USER=ChoreChampsUser
       - POSTGRES_PASSWORD=asdvoinsadvpoasndasvoi
       - TZ=America/Denver
+    restart: unless-stopped
     volumes:
       - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    env_file:
+    - .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Denver
+      - URL=chorechamps.duckdns.org
+      - VALIDATION=duckdns
+      - STAGING=true
+    volumes:
+      - /home/bridger/data/chorechampswag:/config
+      - ./default.conf:/config/nginx/site-confs/default.conf 
+    ports:
+    - 0.0.0.0:5003:80
+    restart: unless-stopped
 
 volumes:
   developer_home:

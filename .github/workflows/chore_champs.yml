@@ -1,0 +1,36 @@
+name: Update Chore Champs
+env:
+  DUCKDNSTOKEN: ${{ secrets.DUCKDNSTOKEN }}
+on: [push, workflow_dispatch]
+jobs:
+  lint:
+    runs-on: [self-hosted]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run ESLint
+        run: |
+          cd client
+          docker build -t chore_champ_lint -f lint.Dockerfile .
+          docker run -i --rm chore_champ_lint
+
+  deploy-application:
+    needs: lint
+    runs-on: [self-hosted]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: redeploy application
+        run: |
+          cd .devcontainer
+          docker compose pull
+          docker compose build
+          docker compose down
+          docker compose up -d
