@@ -1,5 +1,10 @@
 module.exports = {
-  extends: ["react-app", "react-app/jest"],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended', 
+    'plugin:react-hooks/recommended',
+    "react-app/jest"
+  ],
   rules: {
     "@typescript-eslint/no-unused-vars": [
       "warn",
