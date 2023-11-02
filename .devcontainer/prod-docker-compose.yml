@@ -20,7 +20,7 @@ services:
     working_dir: /app
     command: tail -f /dev/null
 
-  client:
+  chore_champs_client:
     container_name: chore_champs_client
     build:
       context: .
@@ -39,7 +39,7 @@ services:
     ports:
       - 8081:80
 
-  api:
+  chore_champs_api:
     container_name: chore_champs_api
     build:
       context: .
@@ -59,7 +59,7 @@ services:
         cd api
         source /home/developer/.virtualenvs/choreChamps/bin/activate
         pip install -r requirements.txt
-        uvicorn src.main:app --host 0.0.0.0 --reload
+        uvicorn src.main:app --host 0.0.0.0 --reload --port 3000
       "
 
   chore_champs_db:
@@ -90,7 +90,7 @@ services:
       - STAGING=true
     volumes:
       - /home/bridger/data/chorechampswag:/config
-      - ./default.conf:/config/nginx/site-confs/default.conf
+      - ../client/swagdefault.conf:/config/nginx/site-confs/default.conf
     ports:
       - 0.0.0.0:5003:80
     restart: unless-stopped
