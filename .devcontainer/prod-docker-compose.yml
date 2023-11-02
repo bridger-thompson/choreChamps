@@ -1,25 +1,6 @@
 version: "3"
 
 services:
-  editor:
-    container_name: chore_champs_editor
-    build:
-      context: .
-    user: developer
-    privileged: true
-    volumes:
-      - developer_home:/home/developer
-      - ../:/app/
-      - $HOME/.ssh:/home/developer/.ssh
-      - $HOME/.gnupg:/home/developer/.gnupg
-      - ./.bashrc:/home/developer/.bashrc
-      - ./.bash-git-prompt:/home/developer/.bash-git-prompt
-    environment:
-      - TZ=America/Denver
-      - PYTHONPATH=/app/api/
-    working_dir: /app
-    command: tail -f /dev/null
-
   chore_champs_client:
     container_name: chore_champs_client
     build:
@@ -36,8 +17,6 @@ services:
         npm i
         npm run dev
       "
-    ports:
-      - 8081:80
 
   chore_champs_api:
     container_name: chore_champs_api
