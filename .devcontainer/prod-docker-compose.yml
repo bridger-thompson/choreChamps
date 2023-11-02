@@ -4,19 +4,10 @@ services:
   chore_champs_client:
     container_name: chore_champs_client
     build:
-      context: .
-    user: developer
-    volumes:
-      - ../:/app/:z
+      context: ../client
     env_file:
       - .env
     restart: unless-stopped
-    command: >
-      sh -c "
-        cd client
-        npm i
-        npm run dev
-      "
 
   chore_champs_api:
     container_name: chore_champs_api
