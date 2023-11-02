@@ -47,7 +47,7 @@ services:
       - /home/bridger/data/chorechampswag:/config
       - ../client/swagdefault.conf:/config/nginx/site-confs/default.conf
     ports:
-      - 0.0.0.0:5003:80
+      - 0.0.0.0:5003:443
     restart: unless-stopped
 
 volumes:
