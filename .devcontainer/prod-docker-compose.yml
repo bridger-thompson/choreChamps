@@ -37,7 +37,7 @@ services:
         npm run dev
       "
     ports:
-      - 8080:8080
+      - 8081:80
 
   api:
     container_name: chore_champs_api
