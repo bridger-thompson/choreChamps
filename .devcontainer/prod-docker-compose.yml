@@ -21,29 +21,10 @@ services:
   chore_champs_api:
     container_name: chore_champs_api
     build:
-      context: .
-    user: root
-    volumes:
-      - ../:/app/
-      - developer_home:/home/developer
-    working_dir: /app
+      context: ../api
     environment:
       - TZ=America/Denver
     restart: unless-stopped
-    command: >
-      sh -c "
-        mkdir -p /home/developer/virtualenv
-        mkdir /other_api
-        chown -R developer:developer /home/developer/virtualenv
-        chown -R developer:developer /other_api
-        su - developer
-        cp -r api /other_api
-
-        cd /other_api
-        source /home/developer/.virtualenvs/choreChamps/bin/activate
-        pip install -r requirements.txt
-        uvicorn src.main:app --host 0.0.0.0 --reload --port 3000
-      "
 
   chore_champs_db:
     image: postgres
