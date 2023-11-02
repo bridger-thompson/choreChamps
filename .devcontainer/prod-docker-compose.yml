@@ -55,7 +55,8 @@ services:
       sh -c "
         mkdir -p /home/developer/virtualenv
         chown -R developer:developer /home/developer/virtualenv
-        
+        su - developer
+
         cd api
         source /home/developer/.virtualenvs/choreChamps/bin/activate
         pip install -r requirements.txt
