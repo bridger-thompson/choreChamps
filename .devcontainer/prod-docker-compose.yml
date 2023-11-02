@@ -74,9 +74,9 @@ services:
     volumes:
       - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
-  swag:
+  chore_champs_swag:
     image: lscr.io/linuxserver/swag
-    container_name: swag
+    container_name: chore_champs_swag
     cap_add:
       - NET_ADMIN
     env_file:
