@@ -29,7 +29,6 @@ services:
       - ../:/app/:z
     env_file:
       - .env
-    restart: unless-stopped
     command: >
       sh -c "
         cd client
@@ -50,7 +49,6 @@ services:
     working_dir: /app
     environment:
       - TZ=America/Denver
-    restart: unless-stopped
     command: >
       sh -c "
         mkdir -p /home/developer/virtualenv
@@ -70,7 +68,6 @@ services:
       - POSTGRES_USER=ChoreChampsUser
       - POSTGRES_PASSWORD=asdvoinsadvpoasndasvoi
       - TZ=America/Denver
-    restart: unless-stopped
     volumes:
       - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
