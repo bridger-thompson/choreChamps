@@ -12,6 +12,7 @@
 
 ## Nov 11th:
 
+- [ ] Frontend can hit backend can hit db
 - [ ] Authentication for parent vs child
 - [ ] Can link parent and child accounts
 - [ ] Parents can select a child and that selection persists between pages (like docs)
