@@ -1,9 +1,10 @@
-import axios from "axios";
+import { Chore } from "../../models/Chore";
+import { axiosClient } from "../../utils/axiosClient";
 
 export const choreService = {
-  async healthCheck() {
-    const url = `/api/health`;
-    const response = await axios.get(url);
+  async getChores(): Promise<Chore[]> {
+    const url = `/api/chore/all`;
+    const response = await axiosClient.get(url);
     return response.data;
   },
 };

@@ -5,8 +5,8 @@ export const choreKeys = {
   healthKey: ["healthKey"] as const,
 };
 
-export const useHealthCheckQuery = () =>
+export const useGetChoresQuery = () =>
   useQuery({
     queryKey: ["health"],
-    queryFn: async () => await choreService.healthCheck(),
+    queryFn: async () => await choreService.getChores(),
   });

@@ -5,3 +5,7 @@ starlette==0.27.0
 python-dotenv==1.0.0
 h11==0.14.0 
 uvicorn==0.23.2
+backports.zoneinfo==0.2.1
+psycopg==3.1.12
+psycopg-binary==3.1.12
+psycopg-pool==3.1.8

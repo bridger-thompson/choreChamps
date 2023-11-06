@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
+from src.features.chores import chore_router
 from fastapi import FastAPI, Request, HTTPException, APIRouter, encoders, responses
 
 
@@ -32,6 +33,6 @@ router = APIRouter(prefix="/api")
 def health_check():
     return True
 
-# router.include_router(your_router.router)
+router.include_router(chore_router.router)
 
 app.include_router(router)
