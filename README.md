@@ -17,7 +17,7 @@
 - [ ] Can link parent and child accounts
 - [ ] Parents can select a child and that selection persists between pages (like docs)
   - Context
-- [ ] Parents can configure chores for a child
+- [ x ] Parents can configure chores for a child
   - Chores have a name, description, points, and status
 - [ ] Kids can see chores for that day
 
