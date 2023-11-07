@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from 'react-dom/client'
 import "bootstrap";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/custom.scss";
 import App from './App.tsx'
 import { QueryClientProvider } from '@tanstack/react-query';

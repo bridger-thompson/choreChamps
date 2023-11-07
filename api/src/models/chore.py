@@ -8,3 +8,4 @@ class Chore(BaseModel):
   description: Optional[str]
   points: int
   days_of_week: List[int]
+  parent_id: int
