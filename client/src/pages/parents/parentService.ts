@@ -8,15 +8,29 @@ export const parentService = {
     const response = await axiosClient.get(url);
     return response.data;
   },
-  async addChore(chore: Chore) {
+  async addChore(chore: Chore, assignedChildIds: number[]) {
     const url = `/api/parent_chore`;
-    const body = { chore: chore };
+    const body = {
+      id: chore.id,
+      name: chore.name,
+      description: chore.description,
+      points: chore.points,
+      days_of_week: chore.daysOfWeek,
+      assigned_child_ids: assignedChildIds,
+    };
     const response = await axiosClient.post(url, body);
     return response.data;
   },
-  async updateChore(chore: Chore) {
+  async updateChore(chore: Chore, assignedChildIds: number[]) {
     const url = `/api/parent_chore`;
-    const body = { chore: chore };
+    const body = {
+      id: chore.id,
+      name: chore.name,
+      description: chore.description,
+      points: chore.points,
+      days_of_week: chore.daysOfWeek,
+      assigned_child_ids: assignedChildIds,
+    };
     const response = await axiosClient.put(url, body);
     return response.data;
   },
@@ -28,16 +42,6 @@ export const parentService = {
   async getChildrenWithChore(choreId: number): Promise<Child[]> {
     const url = `/api/parent_chore/${choreId}/children`;
     const response = await axiosClient.get(url);
-    return response.data;
-  },
-  async assignChoreToChild(choreId: number, childId: number) {
-    const url = `/api/parent_chore/${choreId}/child/${childId}`;
-    const response = await axiosClient.post(url);
-    return response.data;
-  },
-  async unassignChoreToChild(choreId: number, childId: number) {
-    const url = `/api/parent_chore/${choreId}/child/${childId}`;
-    const response = await axiosClient.delete(url);
     return response.data;
   },
 };

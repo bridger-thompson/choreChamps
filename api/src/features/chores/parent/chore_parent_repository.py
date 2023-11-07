@@ -7,6 +7,7 @@ def get_all_chores():
   sql = """
     SELECT *
     FROM chore
+    order by name
   """
   return run_sql(sql, {}, output_class=Chore)
 
@@ -14,7 +15,8 @@ def get_all_chores():
 def add_chore(chore: Chore):
   sql = """
     INSERT INTO chore (name, description, points, days_of_week, parent_id)
-    VALUES (%(name)s, %(description)s, %(points)s, ARRAY%(days)s, parent_id)
+    VALUES (%(name)s, %(description)s, %(points)s, %(days)s, %(parent_id)s)
+    RETURNING *
   """
   params = {
     "name": chore.name,
@@ -23,7 +25,7 @@ def add_chore(chore: Chore):
     "days": chore.days_of_week,
     "parent_id": chore.parent_id
   }
-  run_sql(sql, params)
+  return run_sql(sql, params, output_class=Chore)[0]
 
 
 def update_chore(updated_chore: Chore):
@@ -32,7 +34,7 @@ def update_chore(updated_chore: Chore):
     SET name = %(name)s,
       description = %(description)s,
       points = %(points)s,
-      days_of_week = ARRAY%(days)s
+      days_of_week = %(days)s
     WHERE id = %(id)s
   """
   params = {
@@ -85,14 +87,12 @@ def assign_chore_to_child(chore_id: int, child_id: int):
   run_sql(sql, params)
 
 
-def unassign_chore_to_child(chore_id: int, child_id: int):
+def unassign_chore(chore_id: int):
   sql = """
     DELETE FROM child_assignment
     WHERE chore_id = %(chore_id)s
-    AND child_id = %(child_id)s
   """
   params = {
     "chore_id": chore_id,
-    "child_id": child_id
   }
   run_sql(sql, params)

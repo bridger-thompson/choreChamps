@@ -19,21 +19,39 @@ export const useGetChoresQuery = () =>
 
 export const useAddChoreMutation = () =>
   useMutation({
-    mutationFn: async (chore: Chore) => {
-      return await parentService.addChore(chore);
+    mutationFn: async ({
+      chore,
+      assignedChildIds,
+    }: {
+      chore: Chore;
+      assignedChildIds: number[];
+    }) => {
+      return await parentService.addChore(chore, assignedChildIds);
     },
-    onSuccess: () => {
+    onSuccess: (_, args) => {
       queryClient.invalidateQueries({ queryKey: choreParentKeys.choresKey });
+      queryClient.invalidateQueries({
+        queryKey: choreParentKeys.childrenWithChoreKey(args.chore.id),
+      });
     },
   });
 
 export const useUpdateChoreMutation = () =>
   useMutation({
-    mutationFn: async (chore: Chore) => {
-      return await parentService.updateChore(chore);
+    mutationFn: async ({
+      chore,
+      assignedChildIds,
+    }: {
+      chore: Chore;
+      assignedChildIds: number[];
+    }) => {
+      return await parentService.updateChore(chore, assignedChildIds);
     },
-    onSuccess: () => {
+    onSuccess: (_, args) => {
       queryClient.invalidateQueries({ queryKey: choreParentKeys.choresKey });
+      queryClient.invalidateQueries({
+        queryKey: choreParentKeys.childrenWithChoreKey(args.chore.id),
+      });
     },
   });
 
@@ -51,28 +69,4 @@ export const useGetChildrenWithChoreQuery = (choreId: number) =>
   useQuery({
     queryKey: choreParentKeys.childrenWithChoreKey(choreId),
     queryFn: async () => await parentService.getChildrenWithChore(choreId),
-  });
-
-export const useAssignChoreToChildMutation = (choreId: number) =>
-  useMutation({
-    mutationFn: async (childId: number) => {
-      return await parentService.assignChoreToChild(choreId, childId);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: choreParentKeys.childrenWithChoreKey(choreId),
-      });
-    },
-  });
-
-export const useUnassignChoreToChildMutation = (choreId: number) =>
-  useMutation({
-    mutationFn: async (childId: number) => {
-      return await parentService.unassignChoreToChild(choreId, childId);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: choreParentKeys.childrenWithChoreKey(choreId),
-      });
-    },
   });

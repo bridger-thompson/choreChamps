@@ -36,7 +36,7 @@ export const ChoreRow: FC<{
         </div>
       </div>
       <div className="col-auto my-auto">
-        <ChoreEditorModal existingChore={chore} />
+        <ChoreEditorModal existingChore={chore} childrenWithChore={children.map(c => c.id)} />
       </div>
       <div className="col-auto my-auto">
         <button className="btn btn-outline-danger">

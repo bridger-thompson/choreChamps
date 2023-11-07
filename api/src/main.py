@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 from src.features.chores import chore_router
+from src.features.child import child_router
 from src.features.chores.parent import chore_parent_router
 from fastapi import FastAPI, Request, HTTPException, APIRouter, encoders, responses
 
@@ -49,6 +50,7 @@ def health_check():
     return True
 
 router.include_router(chore_router.router)
+router.include_router(child_router.router)
 router.include_router(chore_parent_router.router)
 
 app.include_router(router)
