@@ -5,10 +5,10 @@ from typing import List, Optional
 from typing import TypeVar, Type
 
 
-pg_user = os.environ["PG_USER"]
-pg_password = os.environ["PG_PASSWORD"]
-pg_host = os.environ["PG_HOST"]
-pg_db = os.environ["PG_DB"]
+pg_user = os.environ.get("PG_USER") or ""
+pg_password = os.environ.get("PG_PASSWORD") or ""
+pg_host = os.environ.get("PG_HOST") or ""
+pg_db = os.environ.get("PG_DB") or ""
 
 pool = ConnectionPool(
     f"""password={pg_password} user={pg_user} host={pg_host} dbname={pg_db}"""
