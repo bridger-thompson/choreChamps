@@ -5,6 +5,7 @@ import { NavBar } from "./components/navBar/NavBar"
 import { Parents } from "./pages/parents/Parents"
 import { Home } from "./pages/home/Home"
 import { Toaster } from "react-hot-toast"
+import ChildProvider from "./context/childContext"
 
 function App() {
 
@@ -14,12 +15,14 @@ function App() {
       <div className="d-flex flex-column nav-flex">
         <NavBar />
         <div className="overflow-auto flex-grow-1 justify-content-between">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/prizes" element={<Prizes />} />
-            <Route path="/chores" element={<Chores />} />
-            <Route path="/parent" element={<Parents />} />
-          </Routes>
+          <ChildProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/prizes" element={<Prizes />} />
+              <Route path="/chores" element={<Chores />} />
+              <Route path="/parent" element={<Parents />} />
+            </Routes>
+          </ChildProvider>
         </div>
       </div>
     </>

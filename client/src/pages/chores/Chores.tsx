@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FormatDayWeek } from "../../utils/dateConverter";
 import { ChoresDisplay } from "./ChoresDisplay";
+import { ChildContext } from "../../context/childContext";
+import { ChildSelect } from "../../components/ChildSelect";
 
 export const Chores = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const { selectedChild } = useContext(ChildContext)
 
   return (
     <div className="container">
@@ -24,7 +27,15 @@ export const Chores = () => {
           </button>
         </div>
       </div>
-      <ChoresDisplay date={selectedDate} />
+      <div className="row">
+        <div className="col"></div>
+        <div className="col-2">
+          <ChildSelect />
+        </div>
+      </div>
+      {selectedChild &&
+        <ChoresDisplay date={selectedDate} childId={selectedChild.id} />
+      }
     </div>
   )
 }

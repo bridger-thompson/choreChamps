@@ -15,7 +15,7 @@
 - [ x ] Frontend can hit backend can hit db
 - [ ] Authentication for parent vs child
 - [ ] Can link parent and child accounts
-- [ ] Parents can select a child and that selection persists between pages (like docs)
+- [ x ] Parents can select a child and that selection persists between pages (like docs)
   - Context
 - [ x ] Parents can configure chores for a child
   - Chores have a name, description, points, and status

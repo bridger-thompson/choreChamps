@@ -4,9 +4,10 @@ import { useGetChoresForDateQuery } from "./choreHooks"
 import { Spinner } from "../../components/ui/Spinner"
 
 export const ChoresDisplay: FC<{
-  date: Date
-}> = ({ date }) => {
-  const choresQuery = useGetChoresForDateQuery(FormatYearMonthDay(date, '-'), 1)
+  date: Date,
+  childId: number
+}> = ({ date, childId }) => {
+  const choresQuery = useGetChoresForDateQuery(FormatYearMonthDay(date, '-'), childId)
   const chores = choresQuery.data ?? []
 
   if (choresQuery.isLoading) return <Spinner />

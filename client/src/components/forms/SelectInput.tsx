@@ -65,7 +65,7 @@ interface Props<T> {
 export function SelectInput<T>({
   label,
   control,
-  inputClassName,
+  inputClassName = "",
   tabIndex = -1,
   labelClassName = ""
 }: Props<T>) {
@@ -79,40 +79,38 @@ export function SelectInput<T>({
         : "";
 
   const computedLabel = label.toLowerCase().replace(" ", "");
-  const labelClasses = ` my-auto`;
 
   return (
     <div className="form-group">
-      <div className={labelClasses + " "}>
-        <label
-          htmlFor={computedLabel}
-          className={"form-label ps-1 mb-0" + labelClassName}
-        >
-          {label}
-        </label>
-      </div>
-      <div
-        className={inputClassName ? `my-auto ${inputClassName}` : " my-auto"}
-      >
-        <select
-          name={computedLabel}
-          id={computedLabel}
-          className={"form-select" + validationClasses}
-          value={control.displayValue}
-          onChange={(e) => control.setValue(e.target.value)}
-          tabIndex={tabIndex}
-        >
-          {control.options.map((o) => (
-            <option value={o} key={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-        {control.error && hasBeenTouched && (
-          <div className="invalid-feedback" id={`${computedLabel}Feedback`}>
-            {control.error}
-          </div>
-        )}
+      <div className="row">
+        <div className={labelClassName + " my-auto pe-0"}>
+          <label
+            htmlFor={computedLabel}
+            className={"form-label ps-1 mb-0"}>
+            {label}
+          </label>
+        </div>
+        <div className={`my-auto ${inputClassName}`}>
+          <select
+            name={computedLabel}
+            id={computedLabel}
+            className={"form-select" + validationClasses}
+            value={control.displayValue}
+            onChange={(e) => control.setValue(e.target.value)}
+            tabIndex={tabIndex}
+          >
+            {control.options.map((o) => (
+              <option value={o} key={o}>
+                {o}
+              </option>
+            ))}
+          </select>
+          {control.error && hasBeenTouched && (
+            <div className="invalid-feedback" id={`${computedLabel}Feedback`}>
+              {control.error}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
