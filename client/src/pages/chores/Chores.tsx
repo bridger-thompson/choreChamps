@@ -11,26 +11,25 @@ export const Chores = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-3 my-auto">
-          <button className="btn fs-5"
+        <div className="col-md offset-md-4 offset-lg-3">
+          <h1 className="text-center">Chores</h1>
+        </div>
+        <div className="col-md-4 col-lg-3 my-auto">
+          <ChildSelect />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col pe-0">
+          <button className="btn px-0 fw-bold"
             onClick={() => setSelectedDate(d => getYesterday(d))}>
             <i className="bi-arrow-left me-1" />{FormatDayWeek(getYesterday(selectedDate))}
           </button>
         </div>
-        <div className="col">
-          <h1 className="text-center">Chores</h1>
-        </div>
-        <div className="col-3 text-end my-auto">
-          <button className="btn fs-5"
+        <div className="col ps-0 text-end">
+          <button className="btn px-0 fw-bold"
             onClick={() => setSelectedDate(d => getTomorrow(d))}>
             {FormatDayWeek(getTomorrow(selectedDate))}<i className="bi-arrow-right ms-1" />
           </button>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col-2">
-          <ChildSelect />
         </div>
       </div>
       {selectedChild &&
