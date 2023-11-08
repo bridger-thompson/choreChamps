@@ -19,7 +19,7 @@
   - Context
 - [ x ] Parents can configure chores for a child
   - Chores have a name, description, points, and status
-- [ ] Kids can see chores for that day
+- [ x ] Kids can see chores for that day
 
 ## Nov 18th:
 

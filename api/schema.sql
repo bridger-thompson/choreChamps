@@ -77,7 +77,7 @@ create table child_chore (
   child_id  int not null references child(id) ON DELETE CASCADE,
   chore_id  int not null references chore(id) ON DELETE CASCADE,
   status    text not null default 'Incomplete',
-  date      timestamptz not null default NOW(),
+  date      date not null,
   note      text
 );
 

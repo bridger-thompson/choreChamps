@@ -16,9 +16,9 @@ export const NavBar = () => {
 
   return (
     <nav className="bg-primary shadow">
-      <div className="row">
+      <div className="row vw-100">
         {routes.map((r) => (
-          <div className="col-auto px-1 my-auto d-lg-block d-none"
+          <div className="col-auto px-1 my-auto"
             key={r.to}>
             <button className={`btn btn-primary ${isActive(r.to) && "active"}`}
               onClick={() => navigate(r.to)}>
