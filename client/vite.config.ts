@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://api:8000",
+        target: "http://chore_champs_api:8000",
         changeOrigin: true,
       },
     },
