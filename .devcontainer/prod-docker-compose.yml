@@ -6,7 +6,7 @@ services:
     build:
       context: ../client
     env_file:
-      - prod.env
+      - ../client/prod.env
     restart: unless-stopped
 
   chore_champs_api:
