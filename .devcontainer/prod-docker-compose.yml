@@ -13,6 +13,8 @@ services:
     container_name: chore_champs_api
     build:
       context: ../api
+    env_file:
+      - ../api/.env
     environment:
       - TZ=America/Denver
     restart: unless-stopped
