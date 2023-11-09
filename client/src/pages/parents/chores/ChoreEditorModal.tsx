@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { Chore } from "../../models/Chore";
-import { CustomModal, ModalButton, useModal } from "../../components/ui/CustomModal";
-import { TextInput, useTextInput } from "../../components/forms/TextInput";
-import { NumberInput, useNumberInput } from "../../components/forms/NumberInput";
-import { useGetChildrenQuery } from "../../hooks/childHooks";
-import { useAddChoreMutation, useUpdateChoreMutation } from "./parentHooks";
+import { Chore } from "../../../models/Chore";
+import { CustomModal, ModalButton, useModal } from "../../../components/ui/CustomModal";
+import { TextInput, useTextInput } from "../../../components/forms/TextInput";
+import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
+import { useGetChildrenQuery } from "../../../hooks/childHooks";
+import { useAddChoreMutation, useUpdateChoreMutation } from "../parentHooks";
 
 export const ChoreEditorModal: FC<{
   existingChore?: Chore;
@@ -31,7 +31,7 @@ export const ChoreEditorModal: FC<{
         </button>
       ) : (
         <button className="btn btn-primary" onClick={showModal}>
-          <i className="bi-plus-lg" />
+          Add Chore
         </button>
       )}
     </div>

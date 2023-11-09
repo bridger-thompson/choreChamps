@@ -63,7 +63,7 @@ export const NumberInput: FC<NumberInputProps> = ({
           type="number"
           name={computedLabel}
           id={computedLabel}
-          value={control.value || ''}
+          value={control.value}
           className={`form-control ${validationClasses}`}
           onChange={(e) => control.setValue(parseInt(e.target.value, 10))}
           onBlur={() => setHasBeenTouched(!!control.hasRules)}

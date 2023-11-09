@@ -33,7 +33,7 @@ export const Chores = () => {
         </div>
       </div>
       {selectedChild &&
-        <ChoresDisplay date={selectedDate} childId={selectedChild.id} />
+        <ChoresDisplay date={selectedDate} child={selectedChild} />
       }
     </div>
   )

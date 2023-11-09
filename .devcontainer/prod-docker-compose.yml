@@ -6,7 +6,7 @@ services:
     build:
       context: ../client
     env_file:
-      - .env
+      - prod.env
     restart: unless-stopped
 
   chore_champs_api:
@@ -28,6 +28,7 @@ services:
     restart: unless-stopped
     volumes:
       - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - /home/bridger/data/choreChampsDb:/var/lib/postgresql/data
 
   chore_champs_swag:
     image: lscr.io/linuxserver/swag

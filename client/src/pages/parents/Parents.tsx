@@ -1,32 +1,29 @@
-import { Spinner } from "../../components/ui/Spinner";
-import { ChoreEditorModal } from "./ChoreEditorModal";
-import { ChoreRow } from "./ChoreRow";
-import { useGetChoresQuery } from "./parentHooks"
+import { TabbedMenu } from "../../components/ui/TabbedMenu"
+import { ManageChildren } from "./children/ManageChildren"
+import { ManageChores } from "./chores/ManageChores"
 
 export const Parents = () => {
-  const choresQuery = useGetChoresQuery();
-  const chores = choresQuery.data ?? []
-
-  if (choresQuery.isLoading) return <Spinner />
-  if (choresQuery.isError) return <h3 className="text-center">Error getting chores</h3>
-
+  const tabs = [
+    {
+      key: "chores",
+      name: "Chores",
+      component: <ManageChores />
+    },
+    {
+      key: "prizes",
+      name: "Prizes",
+      component: <></>
+    },
+    {
+      key: "children",
+      name: "Children",
+      component: <ManageChildren />
+    }
+  ]
   return (
     <div className="container">
-      <div className="row">
-        <div className="col offset-1">
-          <h1 className="text-center">Parent</h1>
-        </div>
-        <div className="col-1 my-auto">
-          <ChoreEditorModal />
-        </div>
-      </div>
-      <div className="list-group rounded-5">
-        {chores.map((c) => (
-          <div key={c.id} className="list-group-item">
-            <ChoreRow chore={c} />
-          </div>
-        ))}
-      </div>
+      <h1 className="text-center">Parent</h1>
+      <TabbedMenu tabs={tabs} />
     </div>
   )
 }

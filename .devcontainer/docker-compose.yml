@@ -70,6 +70,7 @@ services:
       - TZ=America/Denver
     volumes:
       - ../api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - /home/bridger/data/choreChampsDb:/var/lib/postgresql/data
 
 volumes:
   developer_home:

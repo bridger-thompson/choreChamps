@@ -14,7 +14,7 @@
 
 - [ x ] Frontend can hit backend can hit db
 - [ ] Authentication for parent vs child
-- [ ] Can link parent and child accounts
+- [ x ] Can link parent and child accounts
 - [ x ] Parents can select a child and that selection persists between pages (like docs)
   - Context
 - [ x ] Parents can configure chores for a child
@@ -27,11 +27,11 @@
 - [ ] Kids can leave a note when they mark the chore
 - [ ] Completing a chore gives the child points
 - [ ] Completing all chores for that day gives bonus points
-- [ ] Kids can cycle through future and past days
+- [ x ] Kids can cycle through future and past days
 
 ## Nov 25th:
 
-- [ ] Parent can override their childrens points
+- [ x ] Parent can override their childrens points
 - [ ] Parents can configure prizes for a child
   - Prizes have a name, url, image, and price
 - [ ] Kids can see prizes and their point values
@@ -40,7 +40,7 @@
 
 ## Dec 2:
 
-- [ ] Chores can be repeatable automatically from the interval the parent states
+- [ x ] Chores can be repeatable automatically from the interval the parent states
 - [ ] Parents can see number of chores a child has per day, ratio/percentage of chores they completed that day/week/month, and other metadata
 - [ ] Both can see a history of prizes the child has purchased
 - [ ] Parent can undo a purchase

@@ -11,9 +11,11 @@ export type ChildContextType = {
 }
 
 const ChildProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [selectedChild, setSelectedChild] = useState<Child>()
+  const child = localStorage.getItem("selectedChild")
+  const [selectedChild, setSelectedChild] = useState<Child>(child ? JSON.parse(child) : undefined)
   const selectChild = (child: Child) => {
     setSelectedChild(child)
+    localStorage.setItem("selectedChild", JSON.stringify(child))
   }
   return (
     <ChildContext.Provider value={{ selectedChild, selectChild }}>
