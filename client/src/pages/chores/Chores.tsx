@@ -4,12 +4,16 @@ import { ChoresDisplay } from "./ChoresDisplay";
 import { ChildContext } from "../../context/childContext";
 import { ChildSelect } from "../../components/ChildSelect";
 import { useGetChildsPointsQuery } from "../../hooks/childHooks";
+import { Spinner } from "../../components/ui/Spinner";
 
 export const Chores = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const { selectedChild } = useContext(ChildContext)
   const pointsQuery = useGetChildsPointsQuery(selectedChild?.id)
   const points = pointsQuery.data
+
+  if (pointsQuery.isLoading) return <Spinner />
+  if (pointsQuery.isError) return <h3 className="text-center">Error getting points</h3>
 
   return (
     <div className="container">
