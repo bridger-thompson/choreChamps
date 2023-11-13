@@ -10,6 +10,7 @@ def get_all_children_for_parent(parent_id: int):
           points
         FROM child
         WHERE parent_id = %(parent_id)s
+        ORDER BY name
     """
     params = {"parent_id": parent_id}
     return run_sql(sql, params, output_class=Child)
