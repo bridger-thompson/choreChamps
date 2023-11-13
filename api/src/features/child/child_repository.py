@@ -15,14 +15,14 @@ def get_all_children_for_parent(parent_id: int):
     return run_sql(sql, params, output_class=Child)
 
 
-def get_child(id: int):
+def get_childs_points(id: int):
     sql = """
         SELECT *
         FROM child
         WHERE id = %(id)s
     """
     params = {"id": id}
-    return run_sql(sql, params, output_class=Child)[0]
+    return run_sql(sql, params, output_class=Child)[0].points
 
 
 def add_child(child: Child, parent_id: int):

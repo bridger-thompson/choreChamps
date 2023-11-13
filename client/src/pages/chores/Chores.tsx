@@ -3,10 +3,13 @@ import { FormatDayWeek } from "../../utils/dateConverter";
 import { ChoresDisplay } from "./ChoresDisplay";
 import { ChildContext } from "../../context/childContext";
 import { ChildSelect } from "../../components/ChildSelect";
+import { useGetChildsPointsQuery } from "../../hooks/childHooks";
 
 export const Chores = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const { selectedChild } = useContext(ChildContext)
+  const pointsQuery = useGetChildsPointsQuery(selectedChild?.id)
+  const points = pointsQuery.data ?? -1
 
   return (
     <div className="container">
@@ -17,6 +20,9 @@ export const Chores = () => {
         <div className="col-md-4 col-lg-3 my-auto">
           <ChildSelect />
         </div>
+      </div>
+      <div className="fw-bold fs-5 text-end ">
+        Points: {points !== undefined ? points : "N/A"}
       </div>
       <div className="row">
         <div className="col pe-0">
