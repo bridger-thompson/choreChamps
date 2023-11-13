@@ -9,7 +9,7 @@ export const Chores = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const { selectedChild } = useContext(ChildContext)
   const pointsQuery = useGetChildsPointsQuery(selectedChild?.id)
-  const points = pointsQuery.data ?? -1
+  const points = pointsQuery.data
 
   return (
     <div className="container">
