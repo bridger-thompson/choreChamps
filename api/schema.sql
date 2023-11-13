@@ -1,4 +1,5 @@
 drop table if exists child_prize;
+DROP TRIGGER IF EXISTS update_child_points_trigger ON child_chore;
 drop table if exists child_chore;
 drop table if exists child_assignment;
 drop table if exists child;
@@ -87,3 +88,59 @@ create table child_prize (
   prize_id      int references prize(id) not null,
   purchased_at  timestamptz not null default NOW()
 );
+
+CREATE OR REPLACE FUNCTION update_child_points()
+RETURNS TRIGGER AS $$
+DECLARE
+    total_incomplete_chores INT;
+BEGIN
+    IF OLD.status = 'Incomplete' AND NEW.status = 'Complete' THEN
+        UPDATE child
+        SET points = points + (
+            SELECT points FROM chore WHERE id = NEW.chore_id
+        )
+        WHERE id = NEW.child_id;
+
+        SELECT COUNT(*)
+        INTO total_incomplete_chores
+        FROM child_chore
+        WHERE child_id = NEW.child_id
+            AND status = 'Incomplete'
+            AND date = NEW.date;
+
+        IF total_incomplete_chores = 1 THEN
+            UPDATE child
+            SET points = points + 100
+            WHERE id = NEW.child_id;
+        END IF;
+
+    ELSIF OLD.status = 'Complete' AND NEW.status = 'Incomplete' THEN
+        UPDATE child
+        SET points = points - (
+            SELECT points FROM chore WHERE id = NEW.chore_id
+        )
+        WHERE id = NEW.child_id;
+
+        SELECT COUNT(*)
+        INTO total_incomplete_chores
+        FROM child_chore
+        WHERE child_id = NEW.child_id
+            AND status = 'Incomplete'
+            AND date = NEW.date;
+
+        IF total_incomplete_chores = 0 THEN
+            UPDATE child
+            SET points = points - 100
+            WHERE id = NEW.child_id;
+        END IF;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER update_child_points_trigger
+BEFORE UPDATE ON child_chore
+FOR EACH ROW
+EXECUTE FUNCTION update_child_points();
