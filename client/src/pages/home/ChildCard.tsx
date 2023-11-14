@@ -2,6 +2,7 @@ import { FC, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { Child } from "../../models/Child";
 import { ChildContext } from "../../context/childContext";
+import { FloatingSquares } from "../../components/ui/FloatingSquares";
 
 export const ChildCard: FC<{
   child: Child
@@ -19,7 +20,11 @@ export const ChildCard: FC<{
         onClick={clickHandler}
         role="button">
         <div className={`card-img-top bg-${child.cardColor}`}
-          style={{ height: "20ex" }}></div>
+          style={{
+            height: "20ex"
+          }}>
+          <FloatingSquares />
+        </div>
         <div className="card-body">
           <div className="fw-bold fs-4">{child.name}</div>
         </div>

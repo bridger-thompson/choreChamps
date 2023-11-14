@@ -26,7 +26,7 @@ export const Chores = () => {
         </div>
       </div>
       <div className="fw-bold fs-5 text-end ">
-        Points: {points !== undefined ? points : "N/A"}
+        Your Points: {points !== undefined ? points : "N/A"}
       </div>
       <div className="row">
         <div className="col pe-0">

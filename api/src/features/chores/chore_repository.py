@@ -8,6 +8,7 @@ def get_all_chores():
     sql = """
         SELECT *
         FROM chore
+        ORDER BY name
     """
     return run_sql(sql, {}, output_class=Chore)
 
@@ -30,6 +31,7 @@ def get_chores_scheduled_for_day_of_week(day_of_week: int, child_id: int):
           ON (a.chore_id = c.id)
         WHERE %(day)s = ANY(days_of_week)
         AND a.child_id = %(child_id)s
+        ORDER BY c.name
     """
     params = {"day": day_of_week, "child_id": child_id}
     return run_sql(sql, params, output_class=Chore)

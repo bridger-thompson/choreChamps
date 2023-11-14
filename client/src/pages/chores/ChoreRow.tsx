@@ -40,11 +40,20 @@ export const ChoreRow: FC<{
       }
       <div className="col-8 px-1">
         <div className={`border border-${child.cardColor} rounded-4 ps-2 py-2`}>
-          {chore.chore?.name}
+          <div className="row">
+            <div className="col my-auto pe-0">
+              {chore.chore?.name}
+            </div>
+            <div className="col-auto pe-3 col-md-2 col-lg-1 text-center my-auto ps-0">
+              <div role="button">
+                <i className="bi-journal small opacity-50" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="col-2 text-center px-1">
-        <div className={`border border-${child.cardColor} rounded-4 py-2`}>
+        <div className={`border border-${child.cardColor} rounded-4 h-100 py-2`}>
           {chore.chore?.points}
         </div>
       </div>

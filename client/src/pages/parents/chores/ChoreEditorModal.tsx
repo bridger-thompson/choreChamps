@@ -137,12 +137,13 @@ export const ChoreEditorModal: FC<{
               <NumberInput control={pointsControl} label="Points" />
               <div>Assigned To</div>
               {allChildren.map((c) => (
-                <div className="form-check" key={c.id}>
+                <div className="form-check" key={c.id}
+                  onClick={() => toggleChildSelection(c.id)}>
                   <input className="form-check-input"
                     type="checkbox"
                     id={c.name}
-                    onChange={() => toggleChildSelection(c.id)}
-                    checked={selectedChildren.includes(c.id)} />
+                    checked={selectedChildren.includes(c.id)}
+                  />
                   <label className="form-check-label" htmlFor={c.name}>
                     {c.name}
                   </label>

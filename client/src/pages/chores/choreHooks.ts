@@ -37,5 +37,8 @@ export const useUpdateChoreStatusMutation = (date: string, childId: number) =>
       queryClient.invalidateQueries({
         queryKey: childKeys.pointsKey(childId),
       });
+      queryClient.invalidateQueries({
+        queryKey: childKeys.childrenKey,
+      });
     },
   });

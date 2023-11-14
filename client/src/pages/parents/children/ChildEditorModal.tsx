@@ -20,7 +20,7 @@ export const ChildEditorModal: FC<{
     "success",
     "warning"
   ]
-  const [selectedColor, setSelectedColor] = useState(colors[0])
+  const [selectedColor, setSelectedColor] = useState(existingChild?.cardColor ?? colors[0])
   const modalControl = useModal("Child Editor", "lg");
   const ModalButton: ModalButton = ({ showModal }) => (
     <div>
