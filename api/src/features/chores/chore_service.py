@@ -26,3 +26,7 @@ def create_and_get_chores_for_date(date: datetime, child_id: int):
 
 def update_chore_status_and_points(id: int, status: str):
     chore_repository.update_chore_status(id, status)
+
+
+def update_note(id: int, note: str):
+    chore_repository.update_note(id, note)

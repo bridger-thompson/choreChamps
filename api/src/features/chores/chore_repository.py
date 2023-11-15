@@ -72,7 +72,7 @@ def update_chore_status(id: int, status: str):
     return run_sql(sql, params)
 
 
-def add_note(id: int, note: str):
+def update_note(id: int, note: str):
     sql = """
         UPDATE child_chore
         SET note = %(note)s

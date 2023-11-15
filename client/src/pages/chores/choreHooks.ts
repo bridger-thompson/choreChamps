@@ -42,3 +42,19 @@ export const useUpdateChoreStatusMutation = (date: string, childId: number) =>
       });
     },
   });
+
+export const useUpdateChoreNoteMutation = (
+  childChoreId: number,
+  date: string,
+  childId: number
+) =>
+  useMutation({
+    mutationFn: async (note: string) => {
+      return await choreService.updateChoreNote(childChoreId, note);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: choreKeys.choresForDate(date, childId),
+      });
+    },
+  });

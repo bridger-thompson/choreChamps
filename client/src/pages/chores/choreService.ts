@@ -7,8 +7,19 @@ export const choreService = {
     const response = await axiosClient.get(url);
     return response.data;
   },
-  async updateChoreStatus(childChoreId: number, status: string): Promise<ChildChore[]> {
+  async updateChoreStatus(
+    childChoreId: number,
+    status: string
+  ): Promise<ChildChore[]> {
     const url = `/api/chore/${childChoreId}/${status}`;
+    const response = await axiosClient.put(url);
+    return response.data;
+  },
+  async updateChoreNote(
+    childChoreId: number,
+    note: string
+  ): Promise<ChildChore[]> {
+    const url = `/api/chore/note/${childChoreId}/${note}`;
     const response = await axiosClient.put(url);
     return response.data;
   },

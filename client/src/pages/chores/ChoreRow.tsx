@@ -4,13 +4,15 @@ import { ChildChore } from "../../models/ChildChore";
 import { FormatYearMonthDay } from "../../utils/dateConverter";
 import { useUpdateChoreStatusMutation } from "./choreHooks";
 import { Child } from "../../models/Child";
+import { ChoreNoteModal } from "./ChoreNoteModal";
 
 export const ChoreRow: FC<{
   chore: ChildChore,
   date: Date,
   child: Child
 }> = ({ chore, date, child }) => {
-  const updateChoreStatusMutation = useUpdateChoreStatusMutation(FormatYearMonthDay(date, '-'), child.id)
+  const formattedDate = FormatYearMonthDay(date, '-')
+  const updateChoreStatusMutation = useUpdateChoreStatusMutation(formattedDate, child.id)
   const [showConfetti, setShowConfetti] = useState(false)
 
   const clickHandler = () => {
@@ -45,9 +47,7 @@ export const ChoreRow: FC<{
               {chore.chore?.name}
             </div>
             <div className="col-auto pe-3 col-md-2 col-lg-1 text-center my-auto ps-0">
-              <div role="button">
-                <i className="bi-journal small opacity-50" />
-              </div>
+              <ChoreNoteModal chore={chore} date={formattedDate} />
             </div>
           </div>
         </div>

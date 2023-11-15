@@ -16,3 +16,8 @@ def get_chores_for_day(date_string: str, child_id: int):
 @router.put("/{id}/{status}")
 def update_chore_status(id: int, status: str):
     chore_service.update_chore_status_and_points(id, status)
+
+
+@router.put("/note/{id}/{note}")
+def update_chore_note(id: int, note: str):
+    chore_service.update_note(id, note)
