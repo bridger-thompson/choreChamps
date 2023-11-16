@@ -24,7 +24,7 @@
 ## Nov 18th:
 
 - [ x ] Kids can mark a chore as complete and incomplete
-- [ ] Kids can leave a note on a chore
+- [ x ] Kids can leave a note on a chore
 - [ x ] Completing a chore gives the child points
 - [ x ] Completing all chores for that day gives bonus points
 - [ x ] Kids can cycle through future and past days
