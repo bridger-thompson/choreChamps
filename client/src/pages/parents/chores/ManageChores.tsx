@@ -15,9 +15,9 @@ export const ManageChores = () => {
       <div className="text-end mb-1 mt-1">
         <ChoreEditorModal />
       </div>
-      <div className="list-group rounded-5">
+      <div className="list-group  rounded-5">
         {chores.map((c) => (
-          <div key={c.id} className="list-group-item">
+          <div key={c.id} className="list-group-item bg-transparent">
             <ChoreRow chore={c} />
           </div>
         ))}

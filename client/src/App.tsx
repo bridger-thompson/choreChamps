@@ -6,12 +6,14 @@ import { Parents } from "./pages/parents/Parents"
 import { Home } from "./pages/home/Home"
 import { Toaster } from "react-hot-toast"
 import ChildProvider from "./context/childContext"
+import { FloatingSquares } from "./components/ui/FloatingSquares"
 
 function App() {
 
   return (
     <>
       <Toaster />
+      <FloatingSquares />
       <div className="d-flex flex-column nav-flex">
         <NavBar />
         <div className="overflow-auto flex-grow-1 justify-content-between">
