@@ -1,6 +1,7 @@
 import { TabbedMenu } from "../../components/ui/TabbedMenu"
 import { ManageChildren } from "./children/ManageChildren"
 import { ManageChores } from "./chores/ManageChores"
+import { ManagePrizes } from "./prizes/ManagePrizes"
 
 export const Parents = () => {
   const tabs = [
@@ -12,7 +13,7 @@ export const Parents = () => {
     {
       key: "prizes",
       name: "Prizes",
-      component: <></>
+      component: <ManagePrizes />
     },
     {
       key: "children",

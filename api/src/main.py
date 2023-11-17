@@ -1,8 +1,10 @@
 from dotenv import load_dotenv
+
 load_dotenv()
 from src.features.chores import chore_router
 from src.features.child import child_router
 from src.features.chores.parent import chore_parent_router
+from src.features.prizes import prize_router
 from fastapi import FastAPI, Request, HTTPException, APIRouter, encoders, responses
 
 
@@ -11,6 +13,7 @@ app = FastAPI(
     redoc_url=None,
     openapi_url=None,
 )
+
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exception: HTTPException):
@@ -49,8 +52,10 @@ router = APIRouter(prefix="/api")
 def health_check():
     return True
 
+
 router.include_router(chore_router.router)
 router.include_router(child_router.router)
 router.include_router(chore_parent_router.router)
+router.include_router(prize_router.router)
 
 app.include_router(router)

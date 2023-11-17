@@ -1,3 +1,4 @@
+drop table if exists purchased_prizes;
 drop table if exists child_prize;
 DROP TRIGGER IF EXISTS update_child_points_trigger ON child_chore;
 drop table if exists child_chore;
@@ -85,8 +86,13 @@ create table child_chore (
 create table child_prize (
   id            serial primary key,
   child_id      int not null references child(id) ON DELETE CASCADE,
-  prize_id      int references prize(id) not null,
-  purchased_at  timestamptz not null default NOW()
+  prize_id      int not null references prize(id) ON DELETE CASCADE
+);
+
+create table purchased_prizes (
+  id              serial primary key,
+  child_prize_id  int not null references child_prize(id) ON DELETE CASCADE,
+  purchased_at    timestamptz not null default NOW()
 );
 
 CREATE OR REPLACE FUNCTION update_child_points()
