@@ -64,3 +64,15 @@ def delete_child(id: int):
     """
     params = {"id": id}
     run_sql(sql, params)
+
+
+def get_child_by_child_prize(child_prize_id: int):
+    sql = """
+        SELECT c.*
+        FROM child c
+        INNER JOIN child_prize cp
+            ON (cp.child_id = c.id)
+        WHERE cp.id = %(child_prize_id)s
+    """
+    params = {"child_prize_id": child_prize_id}
+    return run_sql(sql, params, output_class=Child)[0]

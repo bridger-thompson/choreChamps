@@ -75,7 +75,7 @@ def delete_prize(id: int):
     run_sql(sql, params)
 
 
-def assign_prize_to_child(prize_id, child_id):
+def assign_prize_to_child(prize_id: int, child_id: int):
     sql = """
         INSERT INTO child_prize (child_id, prize_id)
         VALUES (%(child_id)s, %(prize_id)s)
@@ -84,10 +84,44 @@ def assign_prize_to_child(prize_id, child_id):
     run_sql(sql, params)
 
 
-def unassign_prize(prize_id):
+def unassign_prize(prize_id: int):
     sql = """
         DELETE FROM child_prize
         WHERE prize_id = %(prize_id)s
     """
     params = {"prize_id": prize_id}
     run_sql(sql, params)
+
+
+def get_childs_prizes(child_id: int):
+    sql = """
+        SELECT p.*
+        FROM child_prize cp
+        INNER JOIN prize p
+            ON (p.id = cp.prize_id)
+        WHERE cp.child_id = %(child_id)s
+        AND p.active = true
+    """
+    params = {"child_id": child_id}
+    return run_sql(sql, params, output_class=Prize)
+
+
+def purchase_prize(child_prize_id: int):
+    sql = """
+        INSERT INTO purchased_prizes (child_prize_id)
+        VALUES (%(id)s)
+    """
+    params = {"id": child_prize_id}
+    run_sql(sql, params)
+
+
+def get_prize_by_child_prize(child_prize_id: int):
+    sql = """
+        SELECT p.*
+        FROM prize p
+        INNER JOIN child_prize cp
+            ON (cp.prize_id = p.id)
+        WHERE cp.id = %(child_prize_id)s
+    """
+    params = {"child_prize_id": child_prize_id}
+    return run_sql(sql, params, output_class=Prize)[0]
