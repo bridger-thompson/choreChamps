@@ -79,10 +79,11 @@ def get_childs_prize(child_id: int):
     return prize_repository.get_childs_prizes(child_id)
 
 
-@router.post("/purchase/{child_prize_id}")
-def purchase_prize(child_prize_id: int):
-    child = child_repository.get_child_by_child_prize(child_prize_id)
-    prize = prize_repository.get_prize_by_child_prize(child_prize_id)
+@router.post("/{prizeId}/purchase/{childId}")
+def purchase_prize(prizeId: int, childId: int):
+    child = child_repository.get_child(childId)
+    prize = prize_repository.get_prize(prizeId)
+    child_prize_id = prize_repository.get_child_prize_id(child.id, prize.id)
     if child.points >= prize.cost:
         prize_repository.purchase_prize(child_prize_id)
         child.points -= prize.cost
