@@ -17,7 +17,7 @@ export const ManagePrizes = () => {
       </div>
       <div className="list-group rounded-5">
         {prizes.map((prize) => (
-          <div key={prize.id} className="list-group-item bg-transparent">
+          <div key={prize.id} className="list-group-item bg-transparent frosted-glass">
             <PrizeRow prize={prize} />
           </div>
         ))}

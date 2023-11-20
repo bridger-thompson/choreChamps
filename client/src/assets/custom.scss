@@ -1,3 +1,7 @@
 $primary: #6bbdd8;
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss"
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.frosted-glass {
+  backdrop-filter: blur(10px);
+}

@@ -33,7 +33,7 @@ export const ManageChildren = () => {
         </div>
       </div>
       {children.map((c) => (
-        <div key={c.id} className={`border border-2 border-${c.cardColor} rounded-4 row my-1 py-1`}>
+        <div key={c.id} className={`border border-2 border-${c.cardColor} frosted-glass rounded-4 row my-1 py-1`}>
           <div className="col col-md my-auto fs-5">{c.name}</div>
           <div className="col col-md-2 my-auto text-center fs-5">{c.points}</div>
           <div className="col-2 col-md-1 text-end">
