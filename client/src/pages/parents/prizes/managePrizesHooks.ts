@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getQueryClient } from "../../../services/queryClient";
-import { prizeService } from "./prizeService";
+import { prizeService } from "./managePrizesService";
 import { Prize } from "../../../models/Prize";
 
 const queryClient = getQueryClient();

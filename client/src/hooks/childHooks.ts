@@ -1,5 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { childService } from "../services/childService";
+import { getQueryClient } from "../services/queryClient";
+import { Child } from "../models/Child";
+
+const queryClient = getQueryClient();
 
 export const childKeys = {
   childrenKey: ["childrenKey"] as const,
@@ -18,5 +22,36 @@ export const useGetChildsPointsQuery = (id?: number) =>
     queryFn: async () => {
       if (!id) return undefined;
       return await childService.getChildsPoints(id);
+    },
+  });
+
+export const useAddChildMutation = () =>
+  useMutation({
+    mutationFn: async (child: Child) => {
+      return await childService.addChild(child);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
+    },
+  });
+
+export const useUpdateChildMutation = () =>
+  useMutation({
+    mutationFn: async (child: Child) => {
+      return await childService.updateChild(child);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
+    },
+  });
+
+export const useDeleteChildMutation = () =>
+  useMutation({
+    mutationFn: async (id: number) => {
+      return await childService.deleteChild(id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
+      queryClient.invalidateQueries({ queryKey: ["childrenWithChoreKey"] });
     },
   });

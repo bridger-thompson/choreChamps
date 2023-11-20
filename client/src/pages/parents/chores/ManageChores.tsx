@@ -1,7 +1,7 @@
 import { Spinner } from "../../../components/ui/Spinner";
 import { ChoreEditorModal } from "./ChoreEditorModal";
 import { ChoreRow } from "./ChoreRow";
-import { useGetChoresQuery } from "../parentHooks";
+import { useGetChoresQuery } from "./manageChoresHooks";
 
 export const ManageChores = () => {
   const choresQuery = useGetChoresQuery();

@@ -4,7 +4,7 @@ import { CustomModal, ModalButton, useModal } from "../../../components/ui/Custo
 import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
 import { useGetChildrenQuery } from "../../../hooks/childHooks";
-import { useAddChoreMutation, useUpdateChoreMutation } from "../parentHooks";
+import { useAddChoreMutation, useUpdateChoreMutation } from "./manageChoresHooks";
 
 export const ChoreEditorModal: FC<{
   existingChore?: Chore;

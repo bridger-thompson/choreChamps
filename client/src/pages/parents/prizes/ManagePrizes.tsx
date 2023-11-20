@@ -1,7 +1,7 @@
 import { Spinner } from "../../../components/ui/Spinner";
 import { PrizeEditorModal } from "./PrizeEditorModal";
 import { PrizeRow } from "./PrizeRow";
-import { useGetParentsPrizesQuery } from "./prizeHooks";
+import { useGetParentsPrizesQuery } from "./managePrizesHooks";
 
 export const ManagePrizes = () => {
   const prizesQuery = useGetParentsPrizesQuery();

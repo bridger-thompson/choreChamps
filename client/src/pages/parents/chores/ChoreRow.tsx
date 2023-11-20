@@ -1,10 +1,10 @@
 import { FC } from "react"
 import { Chore } from "../../../models/Chore"
-import { useDeleteChoreMutation, useGetChildrenWithChoreQuery } from "../parentHooks"
 import { Spinner } from "../../../components/ui/Spinner"
 import { ChoreEditorModal } from "./ChoreEditorModal"
 import { ConfirmationToast } from "../../../components/forms/ConfirmationToast"
 import toast from "react-hot-toast"
+import { useDeleteChoreMutation, useGetChildrenWithChoreQuery } from "./manageChoresHooks"
 
 export const ChoreRow: FC<{
   chore: Chore

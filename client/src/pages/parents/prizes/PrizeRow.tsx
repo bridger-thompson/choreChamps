@@ -3,7 +3,7 @@ import { Prize } from "../../../models/Prize";
 import { Spinner } from "../../../components/ui/Spinner";
 import { ConfirmationToast } from "../../../components/forms/ConfirmationToast";
 import toast from "react-hot-toast";
-import { useDeletePrizeMutation, useGetChildrenWithPrizeQuery } from "./prizeHooks";
+import { useDeletePrizeMutation, useGetChildrenWithPrizeQuery } from "./managePrizesHooks";
 import { PrizeEditorModal } from "./PrizeEditorModal";
 
 export const PrizeRow: FC<{

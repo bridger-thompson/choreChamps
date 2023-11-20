@@ -4,7 +4,7 @@ import { CustomModal, ModalButton, useModal } from "../../../components/ui/Custo
 import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
 import { useGetChildrenQuery } from "../../../hooks/childHooks";
-import { useAddPrizeMutation, useUpdatePrizeMutation } from "./prizeHooks";
+import { useAddPrizeMutation, useUpdatePrizeMutation } from "./managePrizesHooks";
 
 export const PrizeEditorModal: FC<{
   existingPrize?: Prize;

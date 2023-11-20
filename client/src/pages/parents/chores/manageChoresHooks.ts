@@ -1,9 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { parentService } from "./parentService";
-import { getQueryClient } from "../../services/queryClient";
-import { Chore } from "../../models/Chore";
-import { Child } from "../../models/Child";
-import { childKeys } from "../../hooks/childHooks";
+import { manageChoresService } from "./manageChoresService";
+import { getQueryClient } from "../../../services/queryClient";
+import { Chore } from "../../../models/Chore";
 
 const queryClient = getQueryClient();
 
@@ -16,7 +14,7 @@ export const choreParentKeys = {
 export const useGetChoresQuery = () =>
   useQuery({
     queryKey: choreParentKeys.choresKey,
-    queryFn: async () => await parentService.getChores(),
+    queryFn: async () => await manageChoresService.getChores(),
   });
 
 export const useAddChoreMutation = () =>
@@ -28,7 +26,7 @@ export const useAddChoreMutation = () =>
       chore: Chore;
       assignedChildIds: number[];
     }) => {
-      return await parentService.addChore(chore, assignedChildIds);
+      return await manageChoresService.addChore(chore, assignedChildIds);
     },
     onSuccess: (_, args) => {
       queryClient.invalidateQueries({ queryKey: choreParentKeys.choresKey });
@@ -47,7 +45,7 @@ export const useUpdateChoreMutation = () =>
       chore: Chore;
       assignedChildIds: number[];
     }) => {
-      return await parentService.updateChore(chore, assignedChildIds);
+      return await manageChoresService.updateChore(chore, assignedChildIds);
     },
     onSuccess: (_, args) => {
       queryClient.invalidateQueries({ queryKey: choreParentKeys.choresKey });
@@ -60,7 +58,7 @@ export const useUpdateChoreMutation = () =>
 export const useDeleteChoreMutation = () =>
   useMutation({
     mutationFn: async (id: number) => {
-      return await parentService.deleteChore(id);
+      return await manageChoresService.deleteChore(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: choreParentKeys.choresKey });
@@ -70,36 +68,5 @@ export const useDeleteChoreMutation = () =>
 export const useGetChildrenWithChoreQuery = (choreId: number) =>
   useQuery({
     queryKey: choreParentKeys.childrenWithChoreKey(choreId),
-    queryFn: async () => await parentService.getChildrenWithChore(choreId),
-  });
-
-export const useAddChildMutation = () =>
-  useMutation({
-    mutationFn: async (child: Child) => {
-      return await parentService.addChild(child);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
-    },
-  });
-
-export const useUpdateChildMutation = () =>
-  useMutation({
-    mutationFn: async (child: Child) => {
-      return await parentService.updateChild(child);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
-    },
-  });
-
-export const useDeleteChildMutation = () =>
-  useMutation({
-    mutationFn: async (id: number) => {
-      return await parentService.deleteChild(id);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: childKeys.childrenKey });
-      queryClient.invalidateQueries({ queryKey: ["childrenWithChoreKey"] });
-    },
+    queryFn: async () => await manageChoresService.getChildrenWithChore(choreId),
   });
