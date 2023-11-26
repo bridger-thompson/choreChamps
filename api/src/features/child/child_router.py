@@ -1,6 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from src.features.child import child_repository
 from src.models.child import Child
+from src.models.user import User
+from src.services.oauth_service import authenticate_user
 
 parent_id = 1
 
