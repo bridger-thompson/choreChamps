@@ -6,12 +6,12 @@ import { useGetChildrenQuery } from "../hooks/childHooks"
 import { Spinner } from "./ui/Spinner"
 
 export const ChildSelect = () => {
-  const { selectedChild, selectChild } = useContext(ChildContext)
+  const { selectedChildId: selectedChildId, selectChild } = useContext(ChildContext)
   const childrenQuery = useGetChildrenQuery();
   const children = childrenQuery.data;
 
   const childControl = useSelectInput({
-    initialValue: selectedChild,
+    initialValue: children?.find(c => c.id === selectedChildId),
     options: children ?? [],
     getKey: (c: Child) => c.name,
     setValueCallback: (c?: Child) => {
@@ -22,11 +22,11 @@ export const ChildSelect = () => {
   })
 
   useEffect(() => {
-    if (!selectedChild && children && children.length > 0) {
+    if (!selectedChildId && children && children.length > 0) {
       selectChild(children[0])
       childControl.setValue(children[0].name)
     }
-  }, [selectedChild, children, selectChild, childControl])
+  }, [selectedChildId, children, selectChild, childControl])
 
   if (childrenQuery.isLoading) return <Spinner />
   if (childrenQuery.isError) return <h3 className="text-center">Error getting children</h3>

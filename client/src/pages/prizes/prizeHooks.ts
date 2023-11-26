@@ -20,5 +20,6 @@ export const usePurchasePrizeMutation = (childId: number) => useMutation({
   },
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: childKeys.pointsKey(childId) })
+    queryClient.invalidateQueries({ queryKey: childKeys.childKey(childId) })
   }
 })

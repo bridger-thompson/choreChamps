@@ -7,7 +7,7 @@ export const ChildContext = createContext<ChildContextType>({
 });
 
 export type ChildContextType = {
-  selectedChild?: Child;
+  selectedChildId?: number;
   selectChild: (child: Child) => void;
 }
 
@@ -27,7 +27,7 @@ const ChildProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, [childrenQuery.data, selectChild, selectedChild])
 
   return (
-    <ChildContext.Provider value={{ selectedChild, selectChild }}>
+    <ChildContext.Provider value={{ selectedChildId: selectedChild?.id, selectChild }}>
       {children}
     </ChildContext.Provider>
   )

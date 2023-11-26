@@ -8,6 +8,11 @@ export const childService = {
     const response = await axiosClient.get(url);
     return response.data;
   },
+  async getChild(id: number): Promise<Child> {
+    const url = `/api/child/${id}`;
+    const response = await axiosClient.get(url);
+    return response.data;
+  },
   async getChildsPoints(id: number): Promise<number> {
     const url = `/api/child/points/${id}`;
     const response = await axiosClient.get(url);

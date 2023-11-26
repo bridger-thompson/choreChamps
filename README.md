@@ -32,11 +32,11 @@
 ## Nov 25th:
 
 - [ x ] Parent can override their childrens points
-- [ ] Parents can configure prizes for a child
+- [ x ] Parents can configure prizes for a child
   - Prizes have a name, url, image, and price
-- [ ] Kids can see prizes and their point values
-- [ ] Kids can purchase prizes with their points
-- [ ] Pictorial navigation/menus
+- [ x ] Kids can see prizes and their point values
+- [ x ] Kids can purchase prizes with their points
+- [ x ] Pictorial navigation/menus
 
 ## Dec 2:
 

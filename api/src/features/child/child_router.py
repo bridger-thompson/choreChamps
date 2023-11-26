@@ -14,6 +14,11 @@ def get_all_children_for_parent():
     return child_repository.get_all_children_for_parent(parent_id)
 
 
+@router.get("/{id}")
+def get_child(id: int):
+    return child_repository.get_child(id)
+
+
 @router.post("")
 def add_child(body: Child):
     child_repository.add_child(body, parent_id)

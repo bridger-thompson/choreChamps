@@ -3,19 +3,22 @@ import { FormatDayWeek, FormatYearMonthDay } from "../../utils/dateConverter";
 import { ChoresDisplay } from "./ChoresDisplay";
 import { ChildContext } from "../../context/childContext";
 import { ChildSelect } from "../../components/ChildSelect";
-import { useGetChildsPointsQuery } from "../../hooks/childHooks";
+import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/childHooks";
 import { Spinner } from "../../components/ui/Spinner";
 import { useSearchParams } from "react-router-dom";
 
 export const Chores = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { selectedChild } = useContext(ChildContext);
-  const pointsQuery = useGetChildsPointsQuery(selectedChild?.id);
+  const { selectedChildId } = useContext(ChildContext);
+  const pointsQuery = useGetChildsPointsQuery(selectedChildId);
   const points = pointsQuery.data;
+  const childQuery = useGetChildQuery(selectedChildId)
   const selectedDate = getDateFromSearchParam(searchParams.get("date"))
 
-  if (pointsQuery.isLoading) return <Spinner />;
+  if (pointsQuery.isLoading || childQuery.isLoading) return <Spinner />;
   if (pointsQuery.isError) return <h3 className="text-center">Error getting points</h3>;
+  if (childQuery.isError) return <h3 className="text-center">Error getting child</h3>;
+  if (!childQuery.data) return <h3 className="text-center">Unable to get child</h3>;
 
   const setSelectedTab = (date: Date) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -50,8 +53,8 @@ export const Chores = () => {
           </button>
         </div>
       </div>
-      {selectedChild &&
-        <ChoresDisplay date={selectedDate} child={selectedChild} />
+      {selectedChildId &&
+        <ChoresDisplay date={selectedDate} child={childQuery.data} />
       }
     </div>
   )

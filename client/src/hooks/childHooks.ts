@@ -7,6 +7,7 @@ const queryClient = getQueryClient();
 
 export const childKeys = {
   childrenKey: ["childrenKey"] as const,
+  childKey: (childId?: number) => ["childKey", childId] as const,
   pointsKey: (childId?: number) => ["pointsKey", childId] as const,
 };
 
@@ -16,11 +17,20 @@ export const useGetChildrenQuery = () =>
     queryFn: async () => await childService.getChildren(),
   });
 
+export const useGetChildQuery = (id?: number) =>
+  useQuery({
+    queryKey: childKeys.childKey(id),
+    queryFn: async () => {
+      if (!id) return null
+      return await childService.getChild(id)
+    },
+  });
+
 export const useGetChildsPointsQuery = (id?: number) =>
   useQuery({
     queryKey: childKeys.pointsKey(id),
     queryFn: async () => {
-      if (!id) return undefined;
+      if (!id) return null;
       return await childService.getChildsPoints(id);
     },
   });

@@ -34,7 +34,7 @@ export const ChoreRow: FC<{
     }
   };
   return (
-    <div className="row my-1 fs-5">
+    <div className="row my-1 fs-5 frosted-glass">
       {showConfetti &&
         <div className="d-flex justify-content-center">
           <ConfettiExplosion />
