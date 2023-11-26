@@ -29,9 +29,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <AuthProvider {...oidcConfig}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          {/* <AuthRequired> */}
+          <AuthRequired>
           <App />
-          {/* </AuthRequired> */}
+          </AuthRequired>
         </BrowserRouter>
       </QueryClientProvider>
     </AuthProvider>
