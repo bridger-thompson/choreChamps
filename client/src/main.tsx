@@ -18,7 +18,7 @@ const oidcConfig = {
   authority: "https://bridgerkc.duckdns.org:8641/realms/dev",
   // authority: "https://100.68.122.57:8641/realms/dev",
   client_id: "choreChamps",
-  redirect_uri: "http://localhost:8080/", // window.location?
+  redirect_uri: window.location.origin, // window.location?
   response_type: 'code',
   scope: "openid profile email",
   loadUserInfo: true,
@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <AuthRequired>
-          <App />
+            <App />
           </AuthRequired>
         </BrowserRouter>
       </QueryClientProvider>
