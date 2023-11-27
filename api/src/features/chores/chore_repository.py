@@ -80,3 +80,18 @@ def update_note(id: int, note: str):
     """
     params = {"note": note, "id": id}
     run_sql(sql, params)
+
+
+def calculate_average_number_of_chores_for_child(child_id: int):
+    sql = """
+        SELECT AVG(chore_count) FROM (
+            SELECT child_id, COUNT(*) as chore_count
+            FROM child_assignment
+            WHERE child_id = 4
+            GROUP BY child_id
+        ) AS chore_counts;
+    """
+    params = {"child_id": child_id}
+    results = run_sql(sql, params)
+    print(results[0])
+    return results[0]

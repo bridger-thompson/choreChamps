@@ -25,28 +25,35 @@ export const ManageChildren = () => {
   }
   return (
     <>
-      <div className="row mt-1">
-        <div className="col col-md-8 fw-bold fs-5 my-auto">Name</div>
-        <div className="col col-md-2 text-center fw-bold fs-5 my-auto">Points</div>
-        <div className="col col-md text-center">
-          <ChildEditorModal />
-        </div>
+      <div className="text-end mt-1">
+        <ChildEditorModal />
       </div>
-      {children.map((c) => (
-        <div key={c.id} className={`border border-2 border-${c.cardColor} frosted-glass rounded-4 row my-1 py-1`}>
-          <div className="col col-md my-auto fs-5">{c.name}</div>
-          <div className="col col-md-2 my-auto text-center fs-5">{c.points}</div>
-          <div className="col-2 col-md-1 text-end">
-            <ChildEditorModal existingChild={c} />
+      <div className="row">
+        {children.map((c) => (
+          <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={c.id}>
+            <div className={`card frosted-glass border-${c.cardColor}`}>
+              <div className="card-body">
+                <div className="card-title fw-bold fs-4 text-center">{c.name}</div>
+                <div className="fs-5">Points: {c.points}</div>
+                <div>Avg # Chores Per Day:</div>
+                <div>% Complete (last 7 days):</div>
+                <div>% Complete (last month):</div>
+                <div className="row mt-2">
+                  <div className="col">
+                    <ChildEditorModal existingChild={c} />
+                  </div>
+                  <div className="col">
+                    <button className="btn btn-outline-danger w-100"
+                      onClick={() => deleteHandler(c.id)}>
+                      <i className="bi-trash" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-2 col-md-1">
-            <button className="btn btn-outline-danger"
-              onClick={() => deleteHandler(c.id)}>
-              <i className="bi-trash" />
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div >
     </>
   )
 }

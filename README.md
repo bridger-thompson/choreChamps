@@ -46,6 +46,7 @@
 - [ ] Parent can undo a purchase
 - [ x ] Can toggle dark/light mode (defaults to browser setting)
   - Store in local storage
+- [ x ] Frontend authorization for parent page
 
 ## Dec 9 (due date):
 
@@ -54,7 +55,6 @@
 - [ ] Parents receive a notification when their child purchases a prize
 - [ ] Lots of animations, especially on the child view
 - [ ] Finishing touches
-- [ ] Frontend authorization for parent page
 
 ## Extra Stretch Goals:
 

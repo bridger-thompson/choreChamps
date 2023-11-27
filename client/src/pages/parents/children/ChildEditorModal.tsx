@@ -25,7 +25,7 @@ export const ChildEditorModal: FC<{
   const ModalButton: ModalButton = ({ showModal }) => (
     <div>
       {existingChild ? (
-        <button className="btn btn-outline-secondary" onClick={showModal}>
+        <button className="btn btn-outline-secondary w-100" onClick={showModal}>
           <i className="bi-pencil" />
         </button>
       ) : (
