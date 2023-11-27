@@ -2,7 +2,7 @@ import { Child } from "../models/Child";
 import { camel_to_snake } from "../utils/apiMapper";
 import { axiosClient } from "../utils/axiosClient";
 
-export const childService = {
+export const peopleService = {
   async getChildren(): Promise<Child[]> {
     const url = `/api/child/all`;
     const response = await axiosClient.get(url);
@@ -35,4 +35,9 @@ export const childService = {
     const response = await axiosClient.delete(url);
     return response.data;
   },
+  async userIsAuthorized(pin: string): Promise<boolean> {
+    const url = `/api/parent/${pin}`;
+    const response = await axiosClient.get(url);
+    return response.data;
+  }
 };

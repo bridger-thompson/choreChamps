@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { Child } from "../models/Child"
 import { SelectInput, useSelectInput } from "./forms/SelectInput"
 import { ChildContext } from "../context/childContext"
-import { useGetChildrenQuery } from "../hooks/childHooks"
+import { useGetChildrenQuery } from "../hooks/peopleHooks"
 import { Spinner } from "./ui/Spinner"
 
 export const ChildSelect = () => {

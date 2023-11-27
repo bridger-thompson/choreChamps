@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from src.features.chores.parent import chore_parent_repository
 from src.models.chore import Chore
-from src.features.child import people_repository
+from src.features.people import people_repository
 from src.models.user import User
 from src.services.oauth_service import authenticate_user
 

@@ -1,7 +1,7 @@
 import toast from "react-hot-toast"
 import { ConfirmationToast } from "../../../components/forms/ConfirmationToast"
 import { Spinner } from "../../../components/ui/Spinner"
-import { useDeleteChildMutation, useGetChildrenQuery } from "../../../hooks/childHooks"
+import { useDeleteChildMutation, useGetChildrenQuery } from "../../../hooks/peopleHooks"
 import { ChildEditorModal } from "./ChildEditorModal"
 
 export const ManageChildren = () => {

@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
-from src.features.child import people_repository
+from src.features.people import people_repository
 from src.models.child import Child
 from src.models.user import User
 from src.services.oauth_service import authenticate_user
 
 
 router = APIRouter(
-    prefix="/child", responses={404: {"description": "Chore Endpoint Not Found"}}
+    prefix="/child", responses={404: {"description": "Child Endpoint Not Found"}}
 )
 
 

@@ -3,7 +3,7 @@ import { Child } from "../../../models/Child"
 import { TextInput, useTextInput } from "../../../components/forms/TextInput"
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput"
 import { useModal, ModalButton, CustomModal } from "../../../components/ui/CustomModal"
-import { useAddChildMutation, useUpdateChildMutation } from "../../../hooks/childHooks"
+import { useAddChildMutation, useUpdateChildMutation } from "../../../hooks/peopleHooks"
 
 export const ChildEditorModal: FC<{
   existingChild?: Child

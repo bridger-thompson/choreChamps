@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { choreService } from "./choreService";
 import { getQueryClient } from "../../services/queryClient";
-import { childKeys } from "../../hooks/childHooks";
+import { peopleKeys } from "../../hooks/peopleHooks";
 
 const queryClient = getQueryClient();
 
@@ -35,10 +35,10 @@ export const useUpdateChoreStatusMutation = (date: string, childId: number) =>
         queryKey: choreKeys.choresForDate(date, childId),
       });
       queryClient.invalidateQueries({
-        queryKey: childKeys.pointsKey(childId),
+        queryKey: peopleKeys.pointsKey(childId),
       });
       queryClient.invalidateQueries({
-        queryKey: childKeys.childrenKey,
+        queryKey: peopleKeys.childrenKey,
       });
     },
   });

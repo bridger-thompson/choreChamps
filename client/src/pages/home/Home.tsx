@@ -1,5 +1,5 @@
 import { Spinner } from "../../components/ui/Spinner"
-import { useGetChildrenQuery } from "../../hooks/childHooks"
+import { useGetChildrenQuery } from "../../hooks/peopleHooks"
 import { ChildCard } from "./ChildCard"
 
 export const Home = () => {

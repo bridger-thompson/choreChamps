@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getQueryClient } from "../../services/queryClient";
 import { prizeService } from "./prizeService";
-import { childKeys } from "../../hooks/childHooks";
+import { peopleKeys } from "../../hooks/peopleHooks";
 
 const queryClient = getQueryClient();
 
@@ -19,7 +19,7 @@ export const usePurchasePrizeMutation = (childId: number) => useMutation({
     return await prizeService.purchasePrize(childId, prizeId);
   },
   onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: childKeys.pointsKey(childId) })
-    queryClient.invalidateQueries({ queryKey: childKeys.childKey(childId) })
+    queryClient.invalidateQueries({ queryKey: peopleKeys.pointsKey(childId) })
+    queryClient.invalidateQueries({ queryKey: peopleKeys.childKey(childId) })
   }
 })

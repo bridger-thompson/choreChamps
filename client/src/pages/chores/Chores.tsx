@@ -3,7 +3,7 @@ import { FormatDayWeek, FormatYearMonthDay } from "../../utils/dateConverter";
 import { ChoresDisplay } from "./ChoresDisplay";
 import { ChildContext } from "../../context/childContext";
 import { ChildSelect } from "../../components/ChildSelect";
-import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/childHooks";
+import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/peopleHooks";
 import { Spinner } from "../../components/ui/Spinner";
 import { useSearchParams } from "react-router-dom";
 

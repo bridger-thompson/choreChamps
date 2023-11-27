@@ -101,3 +101,17 @@ def add_parent_and_return_id(username: str):
     params = {"username": username}
     results = run_sql(sql, params)
     return results[0][0]
+
+
+def user_is_authorized(pin: str, username: str):
+    sql = """
+        SELECT *
+        FROM parent
+        WHERE pin = %(pin)s
+        AND username = %(username)s
+    """
+    params = {"pin": pin, "username": username}
+    results = run_sql(sql, params)
+    if results:
+        return True
+    return False

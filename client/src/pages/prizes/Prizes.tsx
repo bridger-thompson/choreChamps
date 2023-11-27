@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ChildSelect } from "../../components/ChildSelect"
 import { ChildContext } from "../../context/childContext";
-import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/childHooks";
+import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/peopleHooks";
 import { Spinner } from "../../components/ui/Spinner";
 import { PrizeDisplay } from "./PrizeDisplay";
 

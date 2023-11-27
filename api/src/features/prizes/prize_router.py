@@ -2,7 +2,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from src.features.prizes import prize_repository
-from src.features.child import people_repository
+from src.features.people import people_repository
 from src.models.prize import Prize
 from src.models.user import User
 from src.services.oauth_service import authenticate_user

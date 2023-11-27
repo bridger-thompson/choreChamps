@@ -1,6 +1,6 @@
 import { FC, ReactNode, createContext, useCallback, useEffect, useState } from "react";
 import { Child } from "../models/Child";
-import { useGetChildrenQuery } from "../hooks/childHooks";
+import { useGetChildrenQuery } from "../hooks/peopleHooks";
 
 export const ChildContext = createContext<ChildContextType>({
   selectChild: () => { }

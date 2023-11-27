@@ -3,7 +3,7 @@ import { Chore } from "../../../models/Chore";
 import { CustomModal, ModalButton, useModal } from "../../../components/ui/CustomModal";
 import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
-import { useGetChildrenQuery } from "../../../hooks/childHooks";
+import { useGetChildrenQuery } from "../../../hooks/peopleHooks";
 import { useAddChoreMutation, useUpdateChoreMutation } from "./manageChoresHooks";
 
 export const ChoreEditorModal: FC<{

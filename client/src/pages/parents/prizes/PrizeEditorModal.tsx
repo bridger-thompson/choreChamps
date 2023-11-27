@@ -3,7 +3,7 @@ import { Prize } from "../../../models/Prize";
 import { CustomModal, ModalButton, useModal } from "../../../components/ui/CustomModal";
 import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
-import { useGetChildrenQuery } from "../../../hooks/childHooks";
+import { useGetChildrenQuery } from "../../../hooks/peopleHooks";
 import { useAddPrizeMutation, useUpdatePrizeMutation } from "./managePrizesHooks";
 
 export const PrizeEditorModal: FC<{
