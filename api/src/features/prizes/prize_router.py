@@ -1,16 +1,16 @@
 from typing import List, Optional
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from src.features.prizes import prize_repository
-from src.features.child import child_repository
+from src.features.child import people_repository
 from src.models.prize import Prize
+from src.models.user import User
+from src.services.oauth_service import authenticate_user
 
 
 router = APIRouter(
     prefix="/prize", responses={404: {"description": "Prize Endpoint Not Found"}}
 )
-
-parent_id = 1
 
 
 class PrizeRequest(BaseModel):
@@ -25,17 +25,18 @@ class PrizeRequest(BaseModel):
 
 
 @router.get("/parent/all")
-def get_parents_prizes():
-    return prize_repository.get_parents_prizes(parent_id)
+def get_parents_prizes(user: User = Depends(authenticate_user)):
+    return prize_repository.get_parents_prizes(user.username)
 
 
 @router.get("/children/{id}")
-def get_parents_children_with_prize(id: int):
-    return prize_repository.get_parents_children_with_prize(id, parent_id)
+def get_parents_children_with_prize(id: int, user: User = Depends(authenticate_user)):
+    return prize_repository.get_parents_children_with_prize(id, user.username)
 
 
 @router.post("")
-def add_prize(body: PrizeRequest):
+def add_prize(body: PrizeRequest, user: User = Depends(authenticate_user)):
+    parent_id = people_repository.get_parent_id(user.username)
     prize = Prize(
         id=0,
         name=body.name,
@@ -61,7 +62,7 @@ def update_prize(body: PrizeRequest):
         image_filename=body.image_filename,
         active=body.active,
         url=body.url,
-        parent_id=parent_id,
+        parent_id=-1,
     )
     prize_repository.update_prize(prize)
     prize_repository.unassign_prize(prize.id)
@@ -81,13 +82,13 @@ def get_childs_prize(child_id: int):
 
 @router.post("/{prizeId}/purchase/{childId}")
 def purchase_prize(prizeId: int, childId: int):
-    child = child_repository.get_child(childId)
+    child = people_repository.get_child(childId)
     prize = prize_repository.get_prize(prizeId)
     child_prize_id = prize_repository.get_child_prize_id(child.id, prize.id)
     if child.points >= prize.cost:
         prize_repository.purchase_prize(child_prize_id)
         child.points -= prize.cost
-        child_repository.update_child(child)
+        people_repository.update_child(child)
     else:
         raise HTTPException(
             status_code=400, detail="Unable to purchase prize. Too expensive."

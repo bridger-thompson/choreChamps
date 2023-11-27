@@ -2,17 +2,19 @@ from src.models.child import Child
 from src.services.helper import run_sql
 
 
-def get_all_children_for_parent(parent_id: int):
+def get_all_children_for_parent(username: str):
     sql = """
-        SELECT id,
-          name,
-          card_color,
-          points
-        FROM child
-        WHERE parent_id = %(parent_id)s
-        ORDER BY name
+        SELECT c.id,
+          c.name,
+          c.card_color,
+          c.points
+        FROM child c
+        INNER JOIN parent p
+            ON (p.id = c.parent_id)
+        WHERE p.username = %(username)s
+        ORDER BY c.name
     """
-    params = {"parent_id": parent_id}
+    params = {"username": username}
     return run_sql(sql, params, output_class=Child)
 
 
@@ -74,3 +76,28 @@ def get_child(id: int):
     """
     params = {"id": id}
     return run_sql(sql, params, output_class=Child)[0]
+
+
+def get_parent_id(username: str):
+    sql = """
+        SELECT id
+        FROM parent p
+        WHERE p.username = %(username)s
+    """
+    params = {"username": username}
+    results = run_sql(sql, params)
+    if results:
+        print(results[0][0])
+        return results[0][0]
+    return add_parent_and_return_id(username)
+
+
+def add_parent_and_return_id(username: str):
+    sql = """
+        INSERT INTO parent (username)
+        VALUES (%(username)s)\
+        RETURNING id
+    """
+    params = {"username": username}
+    results = run_sql(sql, params)
+    return results[0][0]

@@ -1,8 +1,11 @@
 from typing import List, Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from src.features.chores.parent import chore_parent_repository
 from src.models.chore import Chore
+from src.features.child import people_repository
+from src.models.user import User
+from src.services.oauth_service import authenticate_user
 
 
 class UpdateChoreRequest(BaseModel):
@@ -12,9 +15,6 @@ class UpdateChoreRequest(BaseModel):
     points: int
     days_of_week: List[int]
     assigned_child_ids: List[int]
-
-
-parent_id = 1  # replace with auth
 
 
 router = APIRouter(
@@ -29,7 +29,8 @@ def get_all_chores():
 
 
 @router.post("")
-def add_chore(body: UpdateChoreRequest):
+def add_chore(body: UpdateChoreRequest, user: User = Depends(authenticate_user)):
+    parent_id = people_repository.get_parent_id(user.username)
     chore = Chore(
         id=body.id,
         name=body.name,
@@ -65,5 +66,5 @@ def delete_chore(id: int):
 
 
 @router.get("/{id}/children")
-def get_parents_children_with_chore(id: int):
-    return chore_parent_repository.get_parents_children_with_chore(id, parent_id)
+def get_parents_children_with_chore(id: int, user: User = Depends(authenticate_user)):
+    return chore_parent_repository.get_parents_children_with_chore(id, user.username)

@@ -12,7 +12,6 @@ export const AuthRequired: FC<{ children: ReactNode }> = ({ children }) => {
     document.cookie = `jwt=${token}; expires=${expiresDate.toUTCString()}; samesite=Strict; path=/api;`;
   };
   if (auth.user) setCookie(auth.user);
-  console.log(auth.user?.access_token)
 
   useEffect(() => {
     if (

@@ -13,7 +13,7 @@
 ## Nov 11th:
 
 - [ x ] Frontend can hit backend can hit db
-- [ ] Authentication for parent vs child
+- [ x ] Authentication
 - [ x ] Can link parent and child accounts
 - [ x ] Parents can select a child and that selection persists between pages (like docs)
   - Context
@@ -54,6 +54,7 @@
 - [ ] Parents receive a notification when their child purchases a prize
 - [ ] Lots of animations, especially on the child view
 - [ ] Finishing touches
+- [ ] Frontend authorization for parent page
 
 ## Extra Stretch Goals:
 

@@ -15,8 +15,8 @@ const queryClient = getQueryClient();
 
 const oidcConfig = {
   userStore: new WebStorageStateStore({ store: window.localStorage }),
-  // authority: "https://bridgerkc.duckdns.org:8641/realms/dev",
-  authority: "https://100.68.122.57:8641/realms/dev",
+  authority: "https://bridgerkc.duckdns.org:8641/realms/dev",
+  // authority: "https://100.68.122.57:8641/realms/dev",
   client_id: "choreChamps",
   redirect_uri: "http://localhost:8080/", // window.location?
   response_type: 'code',

@@ -19,10 +19,12 @@ def __get_sso_config():
     global audience
     global key
     audience = os.environ["AUTH_AUDIENCE"]
-    jwks_url = "https://bridgerkc.duckdns.org:8641/realms/dev/protocol/openid-connect/certs"
+    jwks_url = (
+        "https://bridgerkc.duckdns.org:8641/realms/dev/protocol/openid-connect/certs"
+    )
     # jwks_url = "https://100.68.122.57:8641/realms/dev/protocol/openid-connect/certs"
     jwks = requests.get(jwks_url)
-    jwk = jwks.json()["keys"][0]
+    jwk = jwks.json()["keys"][1]
     key = RSAAlgorithm.from_jwk(json.dumps(jwk))
 
 
@@ -32,21 +34,15 @@ def get_user(token: str) -> User:
     if not audience or not key:
         __get_sso_config()
     raw_user = jwt.decode(token, audience=audience, key=key, algorithms=["RS256"])  # type: ignore
-    print(raw_user)
+    # print(raw_user)
     user = User(
-        sub=raw_user["sub"],
-        badgerid=raw_user["badgerid"],
-        groups=raw_user.get("groups", []),
-        preferred_username=raw_user["preferred_username"],
-        azp=raw_user["azp"],
+        username=raw_user["preferred_username"],
         email=raw_user["email"],
-        token=token,
     )
     return user
 
 
 def authenticate_user(request: Request) -> User:
-    print(request.headers)
     if "Authorization" in request.headers:
         auth_header = request.headers["Authorization"]
         token = auth_header.split(" ")[1]

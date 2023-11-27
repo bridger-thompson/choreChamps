@@ -56,7 +56,7 @@ def delete_chore(id: int):
   run_sql(sql, params)
 
 
-def get_parents_children_with_chore(chore_id: int, parent_id: int):
+def get_parents_children_with_chore(chore_id: int, username: str):
   sql = """
     SELECT c.id,
       c.name,
@@ -65,12 +65,14 @@ def get_parents_children_with_chore(chore_id: int, parent_id: int):
     FROM child_assignment a
     INNER JOIN child c
       ON (a.child_id = c.id)
+    INNER JOIN parent p
+      ON (p.id = c.parent_id)
     WHERE a.chore_id = %(chore_id)s
-    AND c.parent_id = %(parent_id)s
+    AND p.username = %(username)s
   """
   params = {
     "chore_id": chore_id,
-    "parent_id": parent_id
+    "username": username
   }
   return run_sql(sql, params, output_class=Child)
 

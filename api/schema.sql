@@ -9,9 +9,9 @@ drop table if exists chore;
 drop table if exists parent;
 
 create table parent (
-  id              serial primary key,
-  keycloak_id     text not null,
-  hashed_password text not null
+  id        serial primary key,
+  username  text not null,
+  pin       varchar(4) not null
 );
 
 insert into parent (keycloak_id, hashed_password) values ('1', 'test');

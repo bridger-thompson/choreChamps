@@ -4,26 +4,30 @@ from src.models.prize import Prize
 from src.services.helper import run_sql
 
 
-def get_parents_prizes(parent_id: int):
+def get_parents_prizes(username: str):
     sql = """
-        SELECT * 
-        FROM prize
-        WHERE parent_id = %(parent_id)s
+        SELECT z.* 
+        FROM prize z
+        INNER JOIN parent p
+            ON (p.id = z.parent_id)
+        WHERE p.username = %(username)s
     """
-    params = {"parent_id": parent_id}
+    params = {"username": username}
     return run_sql(sql, params, output_class=Prize)
 
 
-def get_parents_children_with_prize(prize_id: int, parent_id: int):
+def get_parents_children_with_prize(prize_id: int, username: str):
     sql = """
         SELECT c.*
         FROM child c
         INNER JOIN child_prize cp
             ON (c.id = cp.child_id)
-        WHERE c.parent_id = %(parent_id)s
+        INNER JOIN parent p
+            ON (p.id = c.parent_id)
+        WHERE p.username = %(username)s
         AND cp.prize_id = %(prize_id)s
     """
-    params = {"prize_id": prize_id, "parent_id": parent_id}
+    params = {"prize_id": prize_id, "username": username}
     return run_sql(sql, params, output_class=Child)
 
 
