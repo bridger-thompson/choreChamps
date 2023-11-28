@@ -10,8 +10,7 @@ export const Home = () => {
   if (childrenQuery.isError) return <h3 className="text-center">Error getting children</h3>
   return (
     <div className="container text-center">
-      <h1>Select Your Person</h1>
-      <div className="row">
+      <div className="row mt-2">
         {children.map((c) => (
           <ChildCard child={c} key={c.id} />
         ))}

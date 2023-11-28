@@ -3,6 +3,7 @@ import { useGetPrizesForChildQuery, usePurchasePrizeMutation } from "./prizeHook
 import { Spinner } from "../../components/ui/Spinner"
 import { Child } from "../../models/Child"
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 export const PrizeDisplay: FC<{
   child: Child
@@ -10,9 +11,19 @@ export const PrizeDisplay: FC<{
   const prizesQuery = useGetPrizesForChildQuery(child.id)
   const prizes = prizesQuery.data ?? []
   const purchasePrizeMutation = usePurchasePrizeMutation(child.id)
+  const navigate = useNavigate();
 
   if (prizesQuery.isLoading) return <Spinner />
   if (prizesQuery.isError) return <h3 className="text-center">Error getting prizes</h3>
+  if (prizes.length === 0) return (
+    <div className="text-center">
+      <h3>No prizes available</h3>
+      <div>Click <span
+        role="button"
+        onClick={() => navigate("/parent?tab=prizes")}
+        className="text-primary">HERE</span> to add prizes</div>
+    </div>
+  )
 
   const purchaseHandler = (prizeId: number) => {
     purchasePrizeMutation.mutateAsync(prizeId).then(() => {

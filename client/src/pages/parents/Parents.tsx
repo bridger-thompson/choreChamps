@@ -22,6 +22,11 @@ export const Parents = () => {
 
   const tabs = [
     {
+      key: "children",
+      name: "Children",
+      component: <ManageChildren />
+    },
+    {
       key: "chores",
       name: "Chores",
       component: <ManageChores />
@@ -31,11 +36,6 @@ export const Parents = () => {
       name: "Prizes",
       component: <ManagePrizes />
     },
-    {
-      key: "children",
-      name: "Children",
-      component: <ManageChildren />
-    }
   ]
 
   if (!isAuthorized) {

@@ -49,6 +49,7 @@ export const ManageChildren = () => {
                     </button>
                   </div>
                 </div>
+                <div>Recent purchases:</div>
               </div>
             </div>
           </div>
