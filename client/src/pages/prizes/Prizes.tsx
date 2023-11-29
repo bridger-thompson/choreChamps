@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ChildSelect } from "../../components/ChildSelect"
 import { ChildContext } from "../../context/childContext";
-import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/peopleHooks";
+import { useGetChildQuery } from "../../hooks/peopleHooks";
 import { Spinner } from "../../components/ui/Spinner";
 import { PrizeDisplay } from "./PrizeDisplay";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,9 @@ import { useNavigate } from "react-router-dom";
 export const Prizes = () => {
   const { selectedChildId } = useContext(ChildContext);
   const childQuery = useGetChildQuery(selectedChildId);
-  const pointsQuery = useGetChildsPointsQuery(selectedChildId);
-  const points = pointsQuery.data;
   const navigate = useNavigate();
 
-  if (pointsQuery.isLoading || childQuery.isLoading) return <Spinner />;
-  if (pointsQuery.isError) return <h3 className="text-center">Error getting points</h3>;
+  if (childQuery.isLoading) return <Spinner />;
   if (childQuery.isError) return <h3 className="text-center">Error getting child</h3>;
   if (!childQuery.data) return <h3 className="text-center">Unable to get child</h3>
 
@@ -28,19 +25,10 @@ export const Prizes = () => {
           <ChildSelect />
         </div>
       </div>
-      <div className="row mt-1">
-        <div className="col">
-          <button className="btn btn-outline-primary"
-            onClick={() => navigate("/prizes/history")}>
-            View Purchases
-          </button>
-        </div>
-        <div className="col-auto my-auto">
-          <div className="fw-bold fs-5">
-            Your Points: {points !== undefined ? points : "N/A"}
-          </div>
-        </div>
-      </div>
+      <button className="btn btn-outline-primary"
+        onClick={() => navigate("/prizes/history")}>
+        View Purchases
+      </button>
       {selectedChildId && <PrizeDisplay child={childQuery.data} />}
     </div>
   )

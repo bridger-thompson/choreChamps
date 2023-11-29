@@ -3,20 +3,17 @@ import { FormatDayWeek, FormatYearMonthDay } from "../../utils/dateConverter";
 import { ChoresDisplay } from "./ChoresDisplay";
 import { ChildContext } from "../../context/childContext";
 import { ChildSelect } from "../../components/ChildSelect";
-import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/peopleHooks";
+import { useGetChildQuery } from "../../hooks/peopleHooks";
 import { Spinner } from "../../components/ui/Spinner";
 import { useSearchParams } from "react-router-dom";
 
 export const Chores = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { selectedChildId } = useContext(ChildContext);
-  const pointsQuery = useGetChildsPointsQuery(selectedChildId);
-  const points = pointsQuery.data;
   const childQuery = useGetChildQuery(selectedChildId)
   const selectedDate = getDateFromSearchParam(searchParams.get("date"))
 
-  if (pointsQuery.isLoading || childQuery.isLoading) return <Spinner />;
-  if (pointsQuery.isError) return <h3 className="text-center">Error getting points</h3>;
+  if (childQuery.isLoading) return <Spinner />;
   if (childQuery.isError) return <h3 className="text-center">Error getting child</h3>;
   if (!childQuery.data) return <h3 className="text-center">Unable to get child</h3>;
 
@@ -36,20 +33,18 @@ export const Chores = () => {
           <ChildSelect />
         </div>
       </div>
-      <div className="fw-bold fs-5 text-end ">
-        Your Points: {points !== undefined ? points : "N/A"}
-      </div>
       <div className="row">
-        <div className="col pe-0">
-          <button className="btn px-0 fw-bold"
+        <div className="col-auto pe-0">
+          <button className="btn btn-outline-primary rounded-circle"
             onClick={() => setSelectedTab(getYesterday(selectedDate))}>
-            <i className="bi-arrow-left me-1" />{FormatDayWeek(getYesterday(selectedDate))}
+            <i className="bi-arrow-left fs-5" />
           </button>
         </div>
-        <div className="col ps-0 text-end">
-          <button className="btn px-0 fw-bold"
+        <div className="col px-0 text-center fw-bold fs-5 my-auto">{FormatDayWeek(selectedDate)}</div>
+        <div className="col-auto ps-0">
+          <button className="btn btn-outline-primary rounded-circle"
             onClick={() => setSelectedTab(getTomorrow(selectedDate))}>
-            {FormatDayWeek(getTomorrow(selectedDate))}<i className="bi-arrow-right ms-1" />
+            <i className="bi-arrow-right fs-5" />
           </button>
         </div>
       </div>

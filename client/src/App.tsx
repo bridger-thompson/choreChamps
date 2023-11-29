@@ -16,9 +16,9 @@ function App() {
       <Toaster />
       <FloatingSquares />
       <div className="d-flex flex-column nav-flex">
-        <NavBar />
-        <div className="overflow-auto flex-grow-1 justify-content-between">
-          <ChildProvider>
+        <ChildProvider>
+          <NavBar />
+          <div className="overflow-auto flex-grow-1 justify-content-between">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/prizes" element={<Prizes />} />
@@ -26,8 +26,8 @@ function App() {
               <Route path="/chores" element={<Chores />} />
               <Route path="/parent" element={<Parents />} />
             </Routes>
-          </ChildProvider>
-        </div>
+          </div>
+        </ChildProvider>
       </div>
     </>
   )
