@@ -98,3 +98,12 @@ def purchase_prize(prize_id: int, child_id: int):
 @router.get("/purchases/{child_id}")
 def get_purchases_for_child(child_id: int):
     return prize_repository.get_purchases_for_child(child_id)
+
+
+@router.post("/{purchase_id}/undo/{child_id}")
+def undo_purchase(purchase_id: int, child_id: int):
+    child = people_repository.get_child(child_id)
+    cost = prize_repository.get_cost_for_purchase(purchase_id)
+    prize_repository.delete_purchase(purchase_id)
+    child.points += cost
+    people_repository.update_child(child)

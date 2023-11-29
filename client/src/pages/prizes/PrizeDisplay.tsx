@@ -29,7 +29,6 @@ export const PrizeDisplay: FC<{
     purchasePrizeMutation.mutateAsync(prizeId).then(() => {
       toast.success("Purchased Prize!")
     })
-
   }
   return (
     <div>

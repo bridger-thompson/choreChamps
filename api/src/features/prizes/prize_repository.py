@@ -165,3 +165,32 @@ def get_purchases_for_child(child_id: int):
     """
     params = {"child_id": child_id}
     return run_sql(sql, params, output_class=PurchasedPrize)
+
+
+def delete_purchase(purchase_id: int):
+    sql = """
+        DELETE FROM purchased_prizes
+        WHERE id = %(id)s
+    """
+    params = {"id": purchase_id}
+    run_sql(sql, params)
+
+
+def get_cost_for_purchase(purchase_id: int):
+    sql = """
+        SELECT p.*
+        FROM purchased_prizes pp
+            INNER JOIN child_prize cp
+                ON (pp.child_prize_id = cp.id)
+            INNER JOIN prize p
+                ON (p.id = cp.prize_id)
+        WHERE pp.id = %(id)s
+    """
+    params = {"id": purchase_id}
+    results = run_sql(sql, params, output_class=Prize)
+    if results:
+        return results[0].cost
+    raise HTTPException(
+        status_code=400,
+        detail="Unable to find purchase"
+    )

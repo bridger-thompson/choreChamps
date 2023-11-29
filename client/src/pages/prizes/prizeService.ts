@@ -17,5 +17,10 @@ export const prizeService = {
     const url = `/api/prize/purchases/${childId}`
     const response = await axiosClient.get(url)
     return response.data;
-  }
+  },
+  async undoPurchase(childId: number, purchaseId: number) {
+    const url = `/api/prize/${purchaseId}/undo/${childId}`
+    const response = await axiosClient.post(url)
+    return response.data;
+  },
 }
