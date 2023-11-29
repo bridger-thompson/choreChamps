@@ -7,6 +7,7 @@ import { Home } from "./pages/home/Home"
 import { Toaster } from "react-hot-toast"
 import ChildProvider from "./context/childContext"
 import { FloatingSquares } from "./components/ui/FloatingSquares"
+import { PrizeHistory } from "./pages/prizes/history/PrizeHistory"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/prizes" element={<Prizes />} />
+              <Route path="/prizes/history" element={<PrizeHistory />} />
               <Route path="/chores" element={<Chores />} />
               <Route path="/parent" element={<Parents />} />
             </Routes>

@@ -6,7 +6,8 @@ import { peopleKeys } from "../../hooks/peopleHooks";
 const queryClient = getQueryClient();
 
 export const prizeKeys = {
-  prizesKey: (childId: number) => ["prizesKey", childId] as const
+  prizesKey: (childId: number) => ["prizesKey", childId] as const,
+  purchaseHistoryKey: (childId?: number) => ["purchaseHistoryKey", childId] as const
 }
 
 export const useGetPrizesForChildQuery = (childId: number) => useQuery({
@@ -21,5 +22,13 @@ export const usePurchasePrizeMutation = (childId: number) => useMutation({
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: peopleKeys.pointsKey(childId) })
     queryClient.invalidateQueries({ queryKey: peopleKeys.childKey(childId) })
+  }
+})
+
+export const useGetPurchaseHistoryQuery = (childId?: number) => useQuery({
+  queryKey: prizeKeys.purchaseHistoryKey(childId),
+  queryFn: async () => {
+    if (!childId) return []
+    return await prizeService.getPurchaseHistory(childId)
   }
 })

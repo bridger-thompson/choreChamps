@@ -80,10 +80,10 @@ def get_childs_prize(child_id: int):
     return prize_repository.get_childs_prizes(child_id)
 
 
-@router.post("/{prizeId}/purchase/{childId}")
-def purchase_prize(prizeId: int, childId: int):
-    child = people_repository.get_child(childId)
-    prize = prize_repository.get_prize(prizeId)
+@router.post("/{prize_id}/purchase/{child_id}")
+def purchase_prize(prize_id: int, child_id: int):
+    child = people_repository.get_child(child_id)
+    prize = prize_repository.get_prize(prize_id)
     child_prize_id = prize_repository.get_child_prize_id(child.id, prize.id)
     if child.points >= prize.cost:
         prize_repository.purchase_prize(child_prize_id)
@@ -93,3 +93,8 @@ def purchase_prize(prizeId: int, childId: int):
         raise HTTPException(
             status_code=400, detail="Unable to purchase prize. Too expensive."
         )
+
+
+@router.get("/purchases/{child_id}")
+def get_purchases_for_child(child_id: int):
+    return prize_repository.get_purchases_for_child(child_id)

@@ -47,13 +47,15 @@ export const PrizeDisplay: FC<{
           </div>
           <div className="col my-auto">
             <div>{p.cost} Points</div>
-            <div>
-              <a href={p.url}
-                target="_blank"
-                rel="noreferrer">
-                {p.url}<i className="bi-box-arrow-up-right ms-1" />
-              </a>
-            </div>
+            {p.url && (
+              <div>
+                <a href={p.url}
+                  target="_blank"
+                  rel="noreferrer">
+                  {p.url}<i className="bi-box-arrow-up-right ms-1" />
+                </a>
+              </div>
+            )}
           </div>
           <div className="col-auto my-auto">
             <button className="btn btn-primary"

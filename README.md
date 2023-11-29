@@ -42,7 +42,7 @@
 
 - [ x ] Chores can be repeatable automatically from the interval the parent states
 - [ x ] Parents can see number of chores a child has per day, ratio/percentage of chores they completed that day/week/month, and other metadata
-- [ ] Both can see a history of prizes the child has purchased
+- [ x ] Both can see a recent history of prizes the child has purchased
 - [ ] Parent can undo a purchase
 - [ x ] Can toggle dark/light mode (defaults to browser setting)
   - Store in local storage

@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from src.models.child import Child
 from src.models.prize import Prize
+from src.models.purchased_prize import PurchasedPrize
 from src.services.helper import run_sql
 
 
@@ -146,3 +147,21 @@ def get_child_prize_id(child_id: int, prize_id: int):
         return results[0][0]
     print(f"Unable to find child prize. Child: {child_id}, Prize: {prize_id}")
     raise HTTPException(status_code=400, detail="Unable to find child prize")
+
+
+def get_purchases_for_child(child_id: int):
+    sql = """
+        SELECT pp.id as purchase_id,
+            pp.purchased_at,
+            p.id as prize_id,
+            p.name as prize_name,
+            p.cost
+        FROM purchased_prizes pp
+            INNER JOIN child_prize cp
+                ON (pp.child_prize_id = cp.id)
+            INNER JOIN prize p
+                ON (p.id = cp.prize_id)
+        WHERE cp.child_id = %(child_id)s
+    """
+    params = {"child_id": child_id}
+    return run_sql(sql, params, output_class=PurchasedPrize)

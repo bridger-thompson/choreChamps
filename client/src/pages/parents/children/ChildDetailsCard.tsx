@@ -49,7 +49,6 @@ export const ChildDetailsCard: FC<{
               </button>
             </div>
           </div>
-          <div>Recent purchases:</div>
         </div>
       </div>
     </div>
