@@ -1,4 +1,5 @@
 import { Child } from "../models/Child";
+import { ChildChoreMetadata } from "../models/ChildChoreMetadata";
 import { camel_to_snake } from "../utils/apiMapper";
 import { axiosClient } from "../utils/axiosClient";
 
@@ -27,7 +28,7 @@ export const peopleService = {
   async updateChild(child: Child) {
     const url = `/api/child`;
     const body = camel_to_snake(child);
-    const response = await axiosClient.put(url, body);
+    const response = await axiosClient.put(url, body);  
     return response.data;
   },
   async deleteChild(id: number) {
@@ -39,5 +40,10 @@ export const peopleService = {
     const url = `/api/parent/${pin}`;
     const response = await axiosClient.get(url);
     return response.data;
-  }
+  },
+  async getChildsChoreMetadata(childId: number): Promise<ChildChoreMetadata> {
+    const url = `/api/child/${childId}/chore_metadata`;
+    const response = await axiosClient.get(url);
+    return response.data;
+  },
 };

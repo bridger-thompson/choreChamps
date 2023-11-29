@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from fastapi import HTTPException
 from src.models.child_chore import ChildChore
 from src.models.chore import Chore
 from src.services.helper import run_sql
@@ -80,3 +82,45 @@ def update_note(id: int, note: str):
     """
     params = {"note": note, "id": id}
     run_sql(sql, params)
+
+
+def get_avg_num_chores_child_has(child_id: int):
+    sql = """
+        SELECT ca.child_id,
+            SUM(array_length(c.days_of_week, 1)) / 7 AS avg_chores
+        FROM child_assignment ca
+        JOIN chore c 
+            ON (ca.chore_id = c.id)
+        WHERE ca.child_id = %(child_id)s
+        GROUP BY ca.child_id;
+    """
+    params = {"child_id": child_id}
+    results = run_sql(sql, params)
+    if results:
+        return results[0][1]
+    return 0
+
+
+def get_percent_child_completed_for_num_days(child_id: int, num_days: int):
+    sql = """
+        SELECT cc.child_id,
+            COALESCE(
+                ROUND(
+                    (SUM(CASE WHEN cc.status = 'Complete' THEN 1 ELSE 0 END) * 100.0) / NULLIF(COUNT(*), 0)
+                , 2)
+            , 0) AS completion_percentage
+        FROM child_chore cc
+        WHERE cc.date > CURRENT_DATE - %(num_days)s
+            AND cc.date <= CURRENT_DATE
+            AND cc.child_id = %(child_id)s
+        GROUP BY cc.child_id;
+    """
+    params = {
+        "child_id": child_id,
+        "num_days": num_days,
+    }
+    results = run_sql(sql, params)
+    if results:
+        print(results)
+        return results[0][1]
+    return 0

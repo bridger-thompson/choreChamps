@@ -10,6 +10,7 @@ export const peopleKeys = {
   childKey: (childId?: number) => ["childKey", childId] as const,
   pointsKey: (childId?: number) => ["pointsKey", childId] as const,
   authorizeKey: ["authorizeKey"] as const,
+  childChoreMetadataKey: (childId: number) => ["childChoreMetadataKey", childId] as const
 };
 
 export const useGetChildrenQuery = () =>
@@ -73,4 +74,11 @@ export const useAuthorizeUserMutation = () =>
     mutationFn: async (pin: string) => {
       return await peopleService.userIsAuthorized(pin);
     },
+  });
+
+
+export const useGetChildsChoreMetadataQuery = (childId: number) =>
+  useQuery({
+    queryKey: peopleKeys.childChoreMetadataKey(childId),
+    queryFn: async () => await peopleService.getChildsChoreMetadata(childId),
   });

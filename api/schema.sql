@@ -11,10 +11,8 @@ drop table if exists parent;
 create table parent (
   id        serial primary key,
   username  text not null,
-  pin       varchar(4) not null
+  pin       varchar(4) not null default '1234'
 );
-
-insert into parent (keycloak_id, hashed_password) values ('1', 'test');
 
 create table chore (
   id            serial primary key,
