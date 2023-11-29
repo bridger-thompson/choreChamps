@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 from src.features.chores import chore_repository
 from src.models.child_chore import ChildChore
 from src.models.child_chore_metadata import ChildChoreMetadata
@@ -29,7 +29,7 @@ def update_chore_status_and_points(id: int, status: str):
     chore_repository.update_chore_status(id, status)
 
 
-def update_note(id: int, note: str):
+def update_note(id: int, note: Optional[str]):
     chore_repository.update_note(id, note)
 
 

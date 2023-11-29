@@ -10,7 +10,7 @@ export const ChoreNoteModal: FC<{
 }> = ({ chore, date }) => {
   const updateChoreNoteMutation = useUpdateChoreNoteMutation(chore.id, date, chore.childId)
   const noteControl = useTextInput(chore.note ?? "");
-
+  console.log(chore.note)
   const modalControl = useModal("Note Editor", "lg");
   const ModalButton: ModalButton = ({ showModal }) => (
     <div role="button"

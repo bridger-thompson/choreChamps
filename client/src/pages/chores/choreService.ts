@@ -19,7 +19,7 @@ export const choreService = {
     childChoreId: number,
     note: string
   ): Promise<ChildChore[]> {
-    const url = `/api/chore/note/${childChoreId}/${note}`;
+    const url = `/api/chore/note/${childChoreId}/${note !== "" ? note : null}`;
     const response = await axiosClient.put(url);
     return response.data;
   },

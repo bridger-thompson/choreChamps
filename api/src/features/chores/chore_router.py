@@ -20,4 +20,5 @@ def update_chore_status(id: int, status: str):
 
 @router.put("/note/{id}/{note}")
 def update_chore_note(id: int, note: str):
-    chore_service.update_note(id, note)
+    updated_note = None if note == "null" else note
+    chore_service.update_note(id, updated_note)
