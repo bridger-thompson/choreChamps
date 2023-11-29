@@ -13,7 +13,8 @@ router = APIRouter(
 
 @router.get("/all")
 def get_all_children_for_parent(user: User = Depends(authenticate_user)):
-    return people_repository.get_all_children_for_parent(user.username)
+    parent_id = people_repository.get_parent_id(user.username)
+    return people_repository.get_all_children_for_parent(parent_id)
 
 
 @router.get("/{id}")

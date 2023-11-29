@@ -2,19 +2,17 @@ from src.models.child import Child
 from src.services.helper import run_sql
 
 
-def get_all_children_for_parent(username: str):
+def get_all_children_for_parent(parent_id: int):
     sql = """
         SELECT c.id,
           c.name,
           c.card_color,
           c.points
         FROM child c
-        INNER JOIN parent p
-            ON (p.id = c.parent_id)
-        WHERE p.username = %(username)s
+        WHERE c.parent_id = %(parent_id)s
         ORDER BY c.name
     """
-    params = {"username": username}
+    params = {"parent_id": parent_id}
     return run_sql(sql, params, output_class=Child)
 
 
@@ -95,7 +93,7 @@ def get_parent_id(username: str):
 def add_parent_and_return_id(username: str):
     sql = """
         INSERT INTO parent (username)
-        VALUES (%(username)s)\
+        VALUES (%(username)s)
         RETURNING id
     """
     params = {"username": username}
@@ -103,14 +101,14 @@ def add_parent_and_return_id(username: str):
     return results[0][0]
 
 
-def user_is_authorized(pin: str, username: str):
+def user_is_authorized(pin: str, parent_id: int):
     sql = """
         SELECT *
         FROM parent
         WHERE pin = %(pin)s
-        AND username = %(username)s
+        AND id = %(id)s
     """
-    params = {"pin": pin, "username": username}
+    params = {"pin": pin, "id": parent_id}
     results = run_sql(sql, params)
     if results:
         return True

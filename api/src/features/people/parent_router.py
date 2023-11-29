@@ -11,4 +11,5 @@ router = APIRouter(
 
 @router.get("/{pin}")
 def user_is_authorized(pin: str, user: User = Depends(authenticate_user)):
-    return people_repository.user_is_authorized(pin, user.username)
+    parent_id = people_repository.get_parent_id(user.username)
+    return people_repository.user_is_authorized(pin, parent_id)
