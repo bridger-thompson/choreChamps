@@ -24,8 +24,9 @@ router = APIRouter(
 
 
 @router.get("/all")
-def get_all_chores():
-    return chore_parent_repository.get_all_chores()
+def get_all_chores(user: User = Depends(authenticate_user)):
+    parent_id = people_repository.get_parent_id(user.username)
+    return chore_parent_repository.get_all_chores_for_parent(parent_id)
 
 
 @router.post("")

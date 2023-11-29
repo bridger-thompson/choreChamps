@@ -6,15 +6,6 @@ from src.models.chore import Chore
 from src.services.helper import run_sql
 
 
-def get_all_chores():
-    sql = """
-        SELECT *
-        FROM chore
-        ORDER BY name
-    """
-    return run_sql(sql, {}, output_class=Chore)
-
-
 def get_chore(id: int):
     sql = """
         SELECT *
