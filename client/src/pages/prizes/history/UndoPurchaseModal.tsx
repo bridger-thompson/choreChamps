@@ -25,7 +25,7 @@ export const UndoPurchaseModal: FC<{
   const modalControl = useModal("Undo Purchase", "lg");
   const ModalButton: ModalButton = ({ showModal }) => (
     <button className="btn btn-outline-secondary" onClick={showModal}>
-      Undo
+      <i className="bi-arrow-counterclockwise" />
     </button>
   );
   return (

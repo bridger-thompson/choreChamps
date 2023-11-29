@@ -25,9 +25,9 @@ export const Prizes = () => {
           <ChildSelect />
         </div>
       </div>
-      <button className="btn btn-outline-primary"
+      <button className="btn btn-outline-primary mt-1"
         onClick={() => navigate("/prizes/history")}>
-        View Purchases
+        View Purchase History
       </button>
       {selectedChildId && <PrizeDisplay child={childQuery.data} />}
     </div>

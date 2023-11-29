@@ -3,10 +3,11 @@ import { getRoutes } from "./navBarHooks"
 import { ThemeSelector } from "./ThemeSelector";
 import { useContext } from "react";
 import { ChildContext } from "../../context/childContext";
-import { useGetChildsPointsQuery } from "../../hooks/peopleHooks";
+import { useGetChildQuery, useGetChildsPointsQuery } from "../../hooks/peopleHooks";
 
 export const NavBar = () => {
   const { selectedChildId } = useContext(ChildContext);
+  const childQuery = useGetChildQuery(selectedChildId);
   const pointsQuery = useGetChildsPointsQuery(selectedChildId);
   const points = pointsQuery.data;
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ export const NavBar = () => {
       return true
     }
   }
-  console.log(window.location.pathname)
 
   return (
     <nav className="bg-primary shadow">
@@ -37,7 +37,9 @@ export const NavBar = () => {
         <div className="text-end col my-auto">
           {(window.location.pathname.includes("prizes") || window.location.pathname.includes("chores")) && (
             <div className="fw-bold fs-4">
-              Your Points: {points ?? "N/A"}
+              <span className={`rounded px-2 fst-italic text-${childQuery.data?.cardColor ?? "success"} bg-primary-subtle`}>
+                Your Points: {points ?? "N/A"}
+              </span>
             </div>
           )}
         </div>

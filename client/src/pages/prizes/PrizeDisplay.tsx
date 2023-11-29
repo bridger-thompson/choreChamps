@@ -41,11 +41,11 @@ export const PrizeDisplay: FC<{
             </div>
           )}
           <div className="col my-auto">
-            <div>{p.name}</div>
+            <div className="fw-bold fs-5">{p.name}</div>
             <div>{p.description}</div>
           </div>
           <div className="col my-auto">
-            <div>{p.cost} Points</div>
+            <div className="fw-bold fs-5">{p.cost} Points</div>
             {p.url && (
               <div>
                 <a href={p.url}
@@ -57,9 +57,17 @@ export const PrizeDisplay: FC<{
             )}
           </div>
           <div className="col-auto my-auto">
-            <button className="btn btn-primary"
-              onClick={() => purchaseHandler(p.id)}
-              disabled={p.cost > child.points || purchasePrizeMutation.isPending}>Buy</button>
+            {p.cost > child.points ? (
+              <button className="btn btn-secondary"
+                disabled>
+                <i className="bi-x-lg fs-5" />
+              </button>
+            ) : (
+              <button className="btn btn-success"
+                onClick={() => purchaseHandler(p.id)}>
+                <i className="bi-currency-dollar fs-5" />
+              </button>
+            )}
           </div>
         </div>
       ))}
