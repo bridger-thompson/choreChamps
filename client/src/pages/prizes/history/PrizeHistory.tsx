@@ -83,7 +83,7 @@ export const PrizeHistory = () => {
                 {points && p.cost > points ? (
                   <button className="btn btn-secondary"
                     disabled>
-                    <i className="bi-x-lg" />
+                    <i className="bi-currency-dollar" />
                   </button>
                 ) : (
                   <button className="btn btn-success"

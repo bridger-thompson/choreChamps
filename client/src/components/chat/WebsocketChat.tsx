@@ -23,7 +23,17 @@ export const WebsocketChat = () => {
       <div className="border rounded vh-50 frosted-glass"
         style={{ height: "75ex" }}>
         {context.messages.map((message, index) => (
-          <div key={index}>{message}</div>
+          <div key={index}>
+            {message.from === "received" ? (
+              <div className="text-start">
+                <span className="border rounded bg-primary-subtle px-2">{message.content}</span>
+              </div>
+            ) : (
+              <div className="text-end">
+                <span className="border rounded bg-success-subtle px-2">{message.content}</span>
+              </div>
+            )}
+          </div>
         ))}
       </div>
       <form onSubmit={handleSend}>

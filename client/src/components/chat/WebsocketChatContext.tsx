@@ -7,8 +7,13 @@ import React, {
 } from "react";
 
 interface WebsocketChatContextType {
-  messages: string[];
+  messages: MessageType[];
   sendMessage: (msg: string) => void;
+}
+
+interface MessageType {
+  from: "sent" | "received";
+  content: string;
 }
 
 export const WebsocketContext = createContext<WebsocketChatContextType>({
@@ -19,7 +24,7 @@ export const WebsocketContext = createContext<WebsocketChatContextType>({
 export const WebsocketProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -34,15 +39,15 @@ export const WebsocketProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     wsRef.current.onopen = () => {
-      addMessage("Connected to the relay server.");
+      console.log("Connected to the relay server.");
     };
 
     wsRef.current.onmessage = (event) => {
-      addMessage(`Received: ${event.data}`);
+      addMessage(`Them: ${event.data}`, "received");
     };
 
     wsRef.current.onclose = () => {
-      addMessage("Disconnected from the server.");
+      console.log("Disconnected from the server.");
     };
 
     wsRef.current.onerror = (error) => {
@@ -56,14 +61,14 @@ export const WebsocketProvider: React.FC<{ children: ReactNode }> = ({
     };
   }, []);
 
-  const addMessage = (msg: string) => {
-    setMessages((prev) => [...prev, msg]);
+  const addMessage = (msg: string, type: "received" | "sent") => {
+    setMessages((prev) => [...prev, { from: type, content: msg }]);
   };
 
   const sendMessage = (msg: string) => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(msg);
-      addMessage(`You: ${msg}`);
+      addMessage(`You: ${msg}`, "sent");
     }
   };
 

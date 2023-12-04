@@ -30,6 +30,11 @@ export const UndoPurchaseModal: FC<{
   );
   return (
     <CustomModal controls={modalControl} ModalButton={ModalButton}>
+      <div className="modal-header">
+        <h3>Undo Purchase</h3>
+        <button className="btn btn-close"
+          onClick={() => modalControl.hide()}></button>
+      </div>
       <div className="modal-body">
         <PinInput onAuthorize={authorizeUser} />
       </div>

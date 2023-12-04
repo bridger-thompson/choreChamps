@@ -60,7 +60,7 @@ export const PrizeDisplay: FC<{
             {p.cost > child.points ? (
               <button className="btn btn-secondary"
                 disabled>
-                <i className="bi-x-lg fs-5" />
+                <i className="bi-currency-dollar fs-5" />
               </button>
             ) : (
               <button className="btn btn-success"
