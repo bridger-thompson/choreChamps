@@ -4,6 +4,8 @@ import { Spinner } from "../../../components/ui/Spinner";
 import { PrizeEditorModal } from "./PrizeEditorModal";
 import { PrizeRow } from "./PrizeRow";
 import { useGetParentsPrizesQuery } from "./managePrizesHooks";
+import { FrostedListGroup } from "../../../components/ui/FrostedListGroup";
+import { Prize } from "../../../models/Prize";
 
 export const ManagePrizes = () => {
   const prizesQuery = useGetParentsPrizesQuery();
@@ -29,13 +31,9 @@ export const ManagePrizes = () => {
           <PrizeEditorModal />
         </div>
       </div>
-      <div className="list-group rounded-5">
-        {filteredPrizes.map((prize) => (
-          <div key={prize.id} className="list-group-item bg-transparent frosted-glass">
-            <PrizeRow prize={prize} />
-          </div>
-        ))}
-      </div>
+      <FrostedListGroup items={filteredPrizes}
+        getKey={(item: Prize) => item.id}
+        renderItem={(item: Prize) => <PrizeRow prize={item} />} />
     </>
   );
 };

@@ -97,10 +97,10 @@
   - Number input - NumberInput.tsx
   - Dropdown select input - SelectInput.tsx
   - Text input - TextInput.tsx
-- 4+ generic layout components
+- 4+ layout components
   - Custom Modal Wrapper - CustomModal.tsx
   - Tabbed Menu - TabbedMenu.tsx
-  - 
+  - List of items - FrostedListGroup.tsx
   - 
 - authentication and user account support
   - keycloak

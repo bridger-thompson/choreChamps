@@ -4,6 +4,8 @@ import { Spinner } from "../../../components/ui/Spinner";
 import { ChoreEditorModal } from "./ChoreEditorModal";
 import { ChoreRow } from "./ChoreRow";
 import { useGetChoresQuery } from "./manageChoresHooks";
+import { FrostedListGroup } from "../../../components/ui/FrostedListGroup";
+import { Chore } from "../../../models/Chore";
 
 export const ManageChores = () => {
   const choresQuery = useGetChoresQuery();
@@ -29,13 +31,9 @@ export const ManageChores = () => {
           <ChoreEditorModal />
         </div>
       </div>
-      <div className="list-group rounded-5">
-        {filteredChores.map((c) => (
-          <div key={c.id} className="list-group-item bg-transparent frosted-glass">
-            <ChoreRow chore={c} />
-          </div>
-        ))}
-      </div>
+      <FrostedListGroup items={filteredChores}
+        getKey={(item: Chore) => item.id}
+        renderItem={(item: Chore) => <ChoreRow chore={item} />} />
     </>
   )
 }
