@@ -5,6 +5,7 @@ import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
 import { useGetChildrenQuery } from "../../../hooks/peopleHooks";
 import { useAddPrizeMutation, useUpdatePrizeMutation } from "./managePrizesHooks";
+import { CheckboxInput } from "../../../components/forms/CheckboxInput";
 
 export const PrizeEditorModal: FC<{
   existingPrize?: Prize;
@@ -32,7 +33,7 @@ export const PrizeEditorModal: FC<{
         </button>
       ) : (
         <button className="btn btn-primary" onClick={showModal}>
-          Add Prize
+          <i className="bi-plus-lg" />
         </button>
       )}
     </div>
@@ -113,19 +114,11 @@ export const PrizeEditorModal: FC<{
               </div>
               <div>Assigned To</div>
               {allChildren.map((c) => (
-                <div className="form-check" key={c.id}
-                  onClick={() => toggleChildSelection(c.id)}>
-                  <input className="form-check-input"
-                    type="checkbox"
-                    id={c.name}
-                    checked={selectedChildren.includes(c.id)}
-                  />
-                  <label className="form-check-label" htmlFor={c.name}>
-                    {c.name}
-                  </label>
-                </div>
+                <CheckboxInput id={c.id}
+                  value={c.name}
+                  clickHandler={toggleChildSelection}
+                  checked={selectedChildren.includes(c.id)} />
               ))}
-
             </div>
           </div>
           <div className="row mt-2">

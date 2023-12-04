@@ -5,6 +5,7 @@ import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 import { NumberInput, useNumberInput } from "../../../components/forms/NumberInput";
 import { useGetChildrenQuery } from "../../../hooks/peopleHooks";
 import { useAddChoreMutation, useUpdateChoreMutation } from "./manageChoresHooks";
+import { CheckboxInput } from "../../../components/forms/CheckboxInput";
 
 export const ChoreEditorModal: FC<{
   existingChore?: Chore;
@@ -31,7 +32,7 @@ export const ChoreEditorModal: FC<{
         </button>
       ) : (
         <button className="btn btn-primary" onClick={showModal}>
-          Add Chore
+          <i className="bi-plus-lg" />
         </button>
       )}
     </div>
@@ -137,17 +138,10 @@ export const ChoreEditorModal: FC<{
               <NumberInput control={pointsControl} label="Points" />
               <div>Assigned To</div>
               {allChildren.map((c) => (
-                <div className="form-check" key={c.id}
-                  onClick={() => toggleChildSelection(c.id)}>
-                  <input className="form-check-input"
-                    type="checkbox"
-                    id={c.name}
-                    checked={selectedChildren.includes(c.id)}
-                  />
-                  <label className="form-check-label" htmlFor={c.name}>
-                    {c.name}
-                  </label>
-                </div>
+                <CheckboxInput id={c.id}
+                  value={c.name}
+                  clickHandler={toggleChildSelection}
+                  checked={selectedChildren.includes(c.id)} />
               ))}
             </div>
           </div>
