@@ -51,7 +51,7 @@
 ## Dec 9 (due date):
 
 - [ x ] Websocket (chat)
-- [ ] Lots of animations, especially on the child view
+- [ x ] Lots of animations, especially on the child view
 - [ x ] Finishing touches
 
 ## Extra Stretch Goals:

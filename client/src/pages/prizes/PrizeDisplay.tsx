@@ -1,16 +1,15 @@
 import { FC } from "react"
-import { useGetPrizesForChildQuery, usePurchasePrizeMutation } from "./prizeHooks"
+import { useGetPrizesForChildQuery } from "./prizeHooks"
 import { Spinner } from "../../components/ui/Spinner"
 import { Child } from "../../models/Child"
-import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import { PrizeRow } from "./PrizeRow"
 
 export const PrizeDisplay: FC<{
   child: Child
 }> = ({ child }) => {
   const prizesQuery = useGetPrizesForChildQuery(child.id)
   const prizes = prizesQuery.data ?? []
-  const purchasePrizeMutation = usePurchasePrizeMutation(child.id)
   const navigate = useNavigate();
 
   if (prizesQuery.isLoading) return <Spinner />
@@ -25,51 +24,12 @@ export const PrizeDisplay: FC<{
     </div>
   )
 
-  const purchaseHandler = (prizeId: number) => {
-    purchasePrizeMutation.mutateAsync(prizeId).then(() => {
-      toast.success("Purchased Prize!")
-    })
-  }
   return (
     <div>
       {prizes.map(p => (
-        <div key={p.id}
-          className="row border rounded-3 py-2 frosted-glass my-1">
-          {p.imageFilename && (
-            <div className="col-auto">
-              <img src={`/api/prize/image/${p.imageFilename}`} alt="Prize" />
-            </div>
-          )}
-          <div className="col my-auto">
-            <div className="fw-bold fs-5">{p.name}</div>
-            <div>{p.description}</div>
-          </div>
-          <div className="col my-auto">
-            <div className="fw-bold fs-5">{p.cost} Points</div>
-            {p.url && (
-              <div>
-                <a href={p.url}
-                  target="_blank"
-                  rel="noreferrer">
-                  {p.url}<i className="bi-box-arrow-up-right ms-1" />
-                </a>
-              </div>
-            )}
-          </div>
-          <div className="col-auto my-auto">
-            {p.cost > child.points ? (
-              <button className="btn btn-secondary"
-                disabled>
-                <i className="bi-currency-dollar fs-5" />
-              </button>
-            ) : (
-              <button className="btn btn-success"
-                onClick={() => purchaseHandler(p.id)}>
-                <i className="bi-currency-dollar fs-5" />
-              </button>
-            )}
-          </div>
-        </div>
+        <PrizeRow key={p.id}
+          prize={p}
+          child={child} />
       ))}
     </div>
   )
