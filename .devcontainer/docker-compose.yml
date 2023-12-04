@@ -49,6 +49,8 @@ services:
     working_dir: /app
     environment:
       - TZ=America/Denver
+    ports:
+      - 8000:8000
     command: >
       sh -c "
         mkdir -p /home/developer/virtualenv

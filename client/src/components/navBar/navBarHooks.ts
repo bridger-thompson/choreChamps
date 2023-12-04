@@ -20,5 +20,10 @@ export function getRoutes() {
       text: "Parent",
       icon: "bi-person-fill-lock",
     },
+    {
+      to: "/chat",
+      text: "Chat",
+      icon: "bi-chat-dots"
+    }
   ];
 }

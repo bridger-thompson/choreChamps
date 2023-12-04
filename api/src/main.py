@@ -5,7 +5,16 @@ from src.features.chores import chore_router
 from src.features.people import child_router, parent_router
 from src.features.chores.parent import chore_parent_router
 from src.features.prizes import prize_router
-from fastapi import FastAPI, Request, HTTPException, APIRouter, encoders, responses
+from fastapi import (
+    FastAPI,
+    Request,
+    HTTPException,
+    APIRouter,
+    WebSocket,
+    WebSocketDisconnect,
+    encoders,
+    responses,
+)
 
 
 app = FastAPI(
@@ -51,6 +60,37 @@ router = APIRouter(prefix="/api")
 @router.get("/health")
 def health_check():
     return True
+
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections = []
+
+    async def connect(self, websocket: WebSocket):
+        print("connect")
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def broadcast(self, message: str):
+        for connection in self.active_connections:
+            await connection.send_text(message)
+
+
+manager = ConnectionManager()
+
+
+@router.websocket("/ws/chat")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await manager.broadcast(f"{data}")
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
 
 
 router.include_router(chore_router.router)

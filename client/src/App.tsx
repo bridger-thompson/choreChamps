@@ -8,6 +8,8 @@ import { Toaster } from "react-hot-toast"
 import ChildProvider from "./context/childContext"
 import { FloatingSquares } from "./components/ui/FloatingSquares"
 import { PrizeHistory } from "./pages/prizes/history/PrizeHistory"
+import { WebsocketProvider } from "./components/chat/WebsocketChatContext"
+import { WebsocketChat } from "./components/chat/WebsocketChat"
 
 function App() {
 
@@ -17,16 +19,19 @@ function App() {
       <FloatingSquares />
       <div className="d-flex flex-column nav-flex">
         <ChildProvider>
-          <NavBar />
-          <div className="overflow-auto flex-grow-1 justify-content-between">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/prizes" element={<Prizes />} />
-              <Route path="/prizes/history" element={<PrizeHistory />} />
-              <Route path="/chores" element={<Chores />} />
-              <Route path="/parent" element={<Parents />} />
-            </Routes>
-          </div>
+          <WebsocketProvider>
+            <NavBar />
+            <div className="overflow-auto flex-grow-1 justify-content-between">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/prizes" element={<Prizes />} />
+                <Route path="/prizes/history" element={<PrizeHistory />} />
+                <Route path="/chores" element={<Chores />} />
+                <Route path="/parent" element={<Parents />} />
+                <Route path="/chat" element={<WebsocketChat />} />
+              </Routes>
+            </div>
+          </WebsocketProvider>
         </ChildProvider>
       </div>
     </>
