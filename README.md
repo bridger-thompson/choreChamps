@@ -52,7 +52,7 @@
 
 - [ x ] Websocket (chat)
 - [ ] Lots of animations, especially on the child view
-- [ ] Finishing touches
+- [ x ] Finishing touches
 
 ## Extra Stretch Goals:
 
@@ -62,7 +62,6 @@
 - [ ] Hidden games/easter eggs
 - [ ] Parent analytics
 - [ ] Alternative child logins
-
 
 ## Requirements:
 
@@ -101,7 +100,7 @@
   - Custom Modal Wrapper - CustomModal.tsx
   - Tabbed Menu - TabbedMenu.tsx
   - List of items - FrostedListGroup.tsx
-  - 
+  - Colored Card - ColoredCard.tsx
 - authentication and user account support
   - keycloak
 - admin pages and public pages

@@ -2,7 +2,7 @@ import { FC, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { Child } from "../../models/Child";
 import { ChildContext } from "../../context/childContext";
-import classes from "../../components/ui/ShadowHover.module.scss"
+import { ColoredCard } from "../../components/ui/ColoredCard";
 
 export const ChildCard: FC<{
   child: Child
@@ -16,18 +16,10 @@ export const ChildCard: FC<{
   }
   return (
     <div className="col-3">
-      <div className={`card h-100 ${classes.shadow}`}
-        onClick={clickHandler}
-        role="button">
-        <div className={`card-img-top bg-${child.cardColor}`}
-          style={{
-            height: "20ex"
-          }}>
-        </div>
-        <div className="card-body">
-          <div className="fw-bold fs-4">{child.name}</div>
-        </div>
-      </div>
+      <ColoredCard color={child.cardColor}
+        clickHandler={clickHandler}>
+        <div className="fw-bold fs-4">{child.name}</div>
+      </ColoredCard>
     </div>
   )
 }
