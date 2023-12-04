@@ -50,9 +50,7 @@
 
 ## Dec 9 (due date):
 
-- [ ] Parent receives notification when child completes chore, leaves note, and skips chore
-  - Websocket
-- [ ] Parents receive a notification when their child purchases a prize
+- [ x ] Websocket (chat)
 - [ ] Lots of animations, especially on the child view
 - [ ] Finishing touches
 
@@ -64,3 +62,47 @@
 - [ ] Hidden games/easter eggs
 - [ ] Parent analytics
 - [ ] Alternative child logins
+
+
+## Requirements:
+
+- Use of Local Storage
+  - Theme selector - ThemeSelector.tsx
+  - Child selector (chores and prizes pages) - childContext.tsx
+- Client side state stores (e.g. redux or context)
+  - Child selector - childContext.tsx
+- Toasts / global notifications or alerts
+  - Errors - queryClient.tsx
+  - Confirmation toasts - ConfirmationToast.tsx
+- Error handling (both on api requests and render errors)
+  - Query client toasts and logs errors - queryClient.tsx
+- Network Calls (read/write data)
+  - Service files
+- websocket
+  - Chat - WebsocketChat.tsx WebsocketChatContext.tsx
+- Developer type helping (typescript)
+  - Everywhere
+- 10+ pages via a router
+  - Home, Chores, Prizes, Prize history, Chat, Manage children, Manage prizes, Manage chores, Add/edit prize, Add/edit chore
+- CI/CD pipeline
+  - Github actions - chore_champs.yml
+- https support
+  - Swag
+- Live production environment
+  - https://choreChamps.duckdns.org:5003
+- Automated testing and linting in the pipeline (abort build if fails)
+  - Github actions
+- 3+ generic form input components
+  - Checkbox input - CheckboxInput.tsx
+  - Number input - NumberInput.tsx
+  - Dropdown select input - SelectInput.tsx
+  - Text input - TextInput.tsx
+- 4+ generic layout components
+  - Custom Modal Wrapper - CustomModal.tsx
+  - Tabbed Menu - TabbedMenu.tsx
+  - 
+  - 
+- authentication and user account support
+  - keycloak
+- admin pages and public pages
+  - Authorization on parent pages
