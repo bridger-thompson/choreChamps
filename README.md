@@ -61,7 +61,7 @@
 - [ ] Multi-day streak bonuses
 - [ ] Hidden games/easter eggs
 - [ ] Parent analytics
-- [ ] Alternative child logins
+- [ x ] Alternative child logins
 
 ## Requirements:
 
