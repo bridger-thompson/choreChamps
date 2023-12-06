@@ -15,7 +15,7 @@ export const ChildCard: FC<{
     navigate("/chores")
   }
   return (
-    <div className="col-3">
+    <div className="col-lg-3 col-md-6 col-12">
       <ColoredCard color={child.cardColor}
         clickHandler={clickHandler}>
         <div className="fw-bold fs-4">{child.name}</div>

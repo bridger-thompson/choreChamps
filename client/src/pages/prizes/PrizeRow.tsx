@@ -38,6 +38,7 @@ export const PrizeRow: FC<{
           <div>
             <a href={prize.url}
               target="_blank"
+              className="text-truncate"
               rel="noreferrer">
               {prize.url}<i className="bi-box-arrow-up-right ms-1" />
             </a>

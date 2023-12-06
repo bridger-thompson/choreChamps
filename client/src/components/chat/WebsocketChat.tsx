@@ -38,7 +38,7 @@ export const WebsocketChat = () => {
       </div>
       <form onSubmit={handleSend}>
         <div className="row my-1">
-          <div className="col-4 offset-4">
+          <div className="col offset-lg-4 offset-md-2">
             <input
               type="text"
               autoFocus
@@ -47,7 +47,7 @@ export const WebsocketChat = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="col-4 text-start">
+          <div className="col-lg-4 col-md-2 col-auto text-start">
             <button type="submit"
               className="btn btn-primary">Send</button>
           </div>
